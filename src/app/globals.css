@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -7,8 +7,8 @@
   --color-neon-orange: #FF4F14;
   --color-teal-mint: #0AAE98;
   --color-pastel-lavender: #E6CEFC;
-  --color-dark: #161720;
-  --color-bg-cream: #FAF9F6;
+  --color-dark: #12131A;
+  --color-bg-cream: #FAF8F5;
   --color-card-white: #FFFFFF;
 
   --font-bodoni: 'Bodoni Moda', Georgia, serif;
@@ -40,17 +40,22 @@ body {
   font-family: var(--font-script);
 }
 
-/* Elegant Pill Badges */
+/* Funky Elegant Badges */
 .badge-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.4rem 1rem;
   border-radius: 9999px;
   font-family: var(--font-anton);
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badge-pill:hover {
+  transform: translateY(-1px) scale(1.02);
 }
 
 .badge-pill-blue {
@@ -78,36 +83,43 @@ body {
   color: #ffffff;
 }
 
-/* Modern Soft Cards & Elevation */
-.card-modern {
+/* Card Elevation & Hover Glows */
+.card-funky-chic {
   background: #ffffff;
-  border-radius: 1.25rem;
-  border: 1px solid rgba(22, 23, 32, 0.07);
-  box-shadow: 0 10px 30px -5px rgba(22, 23, 32, 0.05);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(18, 19, 26, 0.08);
+  box-shadow: 0 12px 35px -8px rgba(18, 19, 26, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card-modern:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(71, 71, 244, 0.12);
-  border-color: rgba(71, 71, 244, 0.2);
+.card-funky-chic:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px -12px rgba(71, 71, 244, 0.15);
+  border-color: rgba(71, 71, 244, 0.3);
 }
 
-/* Glassmorphism Header */
+/* Funky Gradient Accents */
+.gradient-funky-hero {
+  background: radial-gradient(circle at 10% 20%, rgba(230, 206, 252, 0.5) 0%, rgba(252, 255, 151, 0.4) 40%, rgba(250, 248, 245, 1) 90%);
+}
+
+.gradient-funky-blue {
+  background: linear-gradient(135deg, #4747F4 0%, #3232C8 100%);
+}
+
+.gradient-funky-orange {
+  background: linear-gradient(135deg, #FF4F14 0%, #E03E05 100%);
+}
+
+/* Header Glassmorphism */
 .header-glass {
-  background: rgba(250, 249, 246, 0.85);
+  background: rgba(250, 248, 245, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(22, 23, 32, 0.08);
+  border-bottom: 1px solid rgba(18, 19, 26, 0.08);
 }
 
-/* Custom Selection */
-::selection {
-  background-color: var(--color-lemon-yellow);
-  color: var(--color-dark);
-}
-
-/* Smooth Custom Scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
