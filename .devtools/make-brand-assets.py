@@ -6,7 +6,7 @@ Generates the brand raster assets from the charte fonts.
 Outputs (all committed, none generated at build time):
     src/app/favicon.ico          16/32/48 monogram
     src/app/apple-icon.png       180x180 monogram
-    src/app/opengraph-image.jpg  1200x630 social card
+    src/app/opengraph-image.jpg  2400x1260 social card (2x of the 1200x630 grid)
 
 Anton is fetched from Google Fonts on first run and cached in .devtools/.
 Hey October comes from public/hey_october_font/.
@@ -79,60 +79,136 @@ def make_icons():
     print('icons: favicon.ico, apple-icon.png')
 
 
+def fit_width(font_path, text, target_w, tracking=0):
+    """Font sized so `text` renders at roughly target_w wide."""
+    size = 100
+    for _ in range(30):
+        f = ImageFont.truetype(str(font_path), size)
+        bb = f.getbbox(text)
+        w = (bb[2] - bb[0]) + tracking * max(0, len(text) - 1)
+        if w <= 0:
+            break
+        nxt = max(1, round(size * target_w / w))
+        if nxt == size:
+            break
+        size = nxt
+    return ImageFont.truetype(str(font_path), size)
+
+
+def tracked_width(d, text, font, tracking):
+    return sum(d.textlength(c, font=font) for c in text) + tracking * max(0, len(text) - 1)
+
+
+def draw_tracked(d, xy, text, font, fill, tracking):
+    """PIL has no letter-spacing; step the pen manually."""
+    x, y = xy
+    for ch in text:
+        d.text((x, y), ch, font=font, fill=fill)
+        x += d.textlength(ch, font=font) + tracking
+    return x
+
+
+def fit_cap(font_path, target_cap):
+    """Font whose cap height is target_cap, measured on a flat-topped glyph."""
+    size = target_cap
+    for _ in range(30):
+        f = ImageFont.truetype(str(font_path), size)
+        bb = f.getbbox('H')
+        h = bb[3] - bb[1]
+        if h <= 0:
+            break
+        nxt = max(1, round(size * target_cap / h))
+        if nxt == size:
+            break
+        size = nxt
+    return ImageFont.truetype(str(font_path), size)
+
+
 def make_og():
     """
-    1200x630 social card — the same move as the site hero: black ground,
-    photograph, Anton in lemon with the brush script laid across it.
+    Social card — a pure typographic poster, no photograph: the name is the
+    subject, and at preview size a face competes with it rather than helping.
 
-    Saved as JPEG: WhatsApp is unreliable with previews over a few hundred KB,
-    and this compresses to a fraction of the PNG equivalent.
+    Authored on a 1200x630 grid and rendered at 2x (2400x1260) so it stays
+    sharp on high-density phone screens.
+
+    Nothing is set below ~40px on the 1200 grid. WhatsApp renders the preview
+    around 350px wide, so anything smaller than that lands under ~12px on a
+    phone and simply cannot be read.
+
+    JPEG, because WhatsApp gets unreliable with heavy previews — flat colour
+    and type compress to a fraction of the PNG equivalent.
     """
-    W, H = 1200, 630
+    S = 2                      # render scale
+    W, H = 1200 * S, 630 * S
+    m = 84 * S                 # margin
+    avail = W - 2 * m
+
     img = Image.new('RGB', (W, H), INK)
-
-    # Photograph, right-hand third, desaturated to sit under the type.
-    photo = Image.open(ROOT / 'public/photos/sabrina_photo_06.jpg').convert('RGB')
-    pw = 470
-    ratio = pw / photo.width
-    photo = photo.resize((pw, round(photo.height * ratio)), Image.LANCZOS)
-    top = max(0, (photo.height - H) // 2)
-    photo = photo.crop((0, top, pw, min(top + H, photo.height)))
-    img.paste(photo, (W - pw, 0))
-
-    # Feather the photo's left edge into the ground.
-    grad = Image.new('L', (140, H), 0)
-    gd = ImageDraw.Draw(grad)
-    for x in range(140):
-        gd.line([(x, 0), (x, H)], fill=int(255 * (1 - x / 140)))
-    img.paste(Image.new('RGB', (140, H), INK), (W - pw, 0), grad)
-
     d = ImageDraw.Draw(img)
-    x = 72
 
-    kicker = fit(ANTON, 'X', 15)
-    d.text((x, 92), 'S O M M E L L E R I E   ·   R A D I O   ·   C O N F É R E N C E S',
-           font=kicker, fill=(250, 248, 245, 255))
+    KICKER = 'SOMMELLERIE · RADIO · FORMATION · CONFÉRENCES'
+    PHRASE = "l'hospitalité, autrement"
 
-    name = fit(ANTON, 'SABRINA', 92)
-    d.text((x, 140), 'SABRINA', font=name, fill=LEMON)
-    d.text((x, 246), 'CARLIER', font=name, fill=LEMON)
+    # Kicker — what she does, read first.
+    ktrack = 4 * S
+    kicker = fit_width(ANTON, KICKER, avail * 0.94, ktrack)
+    draw_tracked(d, (m, 62 * S), KICKER, kicker, PAPER, ktrack)
 
-    script = ImageFont.truetype(str(HEY), 62)
-    d.text((x + 14, 352), "l'hospitalité, autrement", font=script, fill=FLAME)
+    # The name.
+    #
+    # Sized from the vertical budget, not the measure: fitting "SABRINA" to the
+    # full width gives a cap height so large that the second line falls off the
+    # card. Width is the ceiling, height is what actually governs.
+    top, bottom = 142 * S, 458 * S
+    LINE = 1.06
+    cap = (bottom - top) / (1 + LINE)
 
-    rule_y = 470
-    d.line([(x, rule_y), (x + 430, rule_y)], fill=(70, 71, 80), width=2)
+    name = fit_cap(ANTON, cap)
+    if tracked_width(d, 'SABRINA', name, 0) > avail:
+        name = fit_width(ANTON, 'SABRINA', avail)
 
-    foot = fit(ANTON, 'X', 15)
-    d.text((x, rule_y + 26),
-           'T R E N T E   A N S   D E   T E R R A I N   ·   L Y O N',
-           font=foot, fill=(170, 170, 178))
-    d.text((x, rule_y + 62), 'S A B R I N A C A R L I E R . F R',
-           font=foot, fill=LEMON)
+    nb = name.getbbox('SABRINA')
+    line_h = (nb[3] - nb[1]) * LINE
+
+    d.text((m - nb[0], top - nb[1]), 'SABRINA', font=name, fill=LEMON)
+    y2 = top + line_h
+    d.text((m - nb[0], y2 - nb[1]), 'CARLIER', font=name, fill=LEMON)
+
+    # Brush script laid across the lower edge of CARLIER, as on the site.
+    name_w = tracked_width(d, 'CARLIER', name, 0)
+    script = fit_width(HEY, PHRASE, name_w * 0.92)
+    sb = script.getbbox(PHRASE)
+
+    layer = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(layer).text(
+        # 0.88 of cap height down: the script clips the bottom edge of the
+        # caps rather than crossing their middle, as in the Les 400 Coups
+        # artwork. At 0.66 it swallowed CARLIER.
+        (m + 22 * S - sb[0], y2 + (nb[3] - nb[1]) * 0.88 - sb[1]),
+        PHRASE, font=script, fill=FLAME + (255,),
+    )
+    layer = layer.rotate(2.6, resample=Image.BICUBIC, center=(m, y2))
+    img.paste(layer, (0, 0), layer)
+
+    # Foot.
+    rule_y = H - 116 * S
+    d.line([(m, rule_y), (m + avail, rule_y)], fill=(64, 65, 76), width=2 * S)
+
+    ftrack = 3 * S
+    fy = rule_y + 30 * S
+
+    foot = fit_width(ANTON, 'TRENTE ANS DE TERRAIN · LYON', avail * 0.44, ftrack)
+    draw_tracked(d, (m, fy), 'TRENTE ANS DE TERRAIN · LYON',
+                 foot, (170, 171, 180), ftrack)
+
+    site = fit_width(ANTON, 'SABRINACARLIER.FR', avail * 0.29, ftrack)
+    sw = tracked_width(d, 'SABRINACARLIER.FR', site, ftrack)
+    draw_tracked(d, (m + avail - sw, fy), 'SABRINACARLIER.FR', site, LEMON, ftrack)
 
     out = ROOT / 'src/app/opengraph-image.jpg'
-    img.save(out, quality=86, optimize=True, progressive=True)
-    print(f'og card: {out.name} ({out.stat().st_size // 1024} KB)')
+    img.save(out, quality=90, optimize=True, progressive=True, subsampling=0)
+    print(f'og card: {out.name} {img.size} ({out.stat().st_size // 1024} KB)')
 
 
 if __name__ == '__main__':
