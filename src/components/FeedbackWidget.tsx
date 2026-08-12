@@ -54,7 +54,7 @@ export default function FeedbackWidget() {
   const [hover, setHover] = useState<Target | null>(null);
   const [target, setTarget] = useState<Target | null>(null);
   const [draft, setDraft] = useState('');
-  const [copied, setCopied] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const persist = setNotes;
@@ -136,33 +136,17 @@ export default function FeedbackWidget() {
     setTarget(null);
   };
 
-  const copyAll = async () => {
-    try {
-      await navigator.clipboard.writeText(toMarkdown(notes));
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2200);
-    } catch {
-      setCopied(false);
-    }
-  };
+  const fileName = `retours-sabrina-${new Date().toISOString().slice(0, 10)}.md`;
 
   const download = () => {
     const blob = new Blob([toMarkdown(notes)], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `retours-sabrina-${new Date().toISOString().slice(0, 10)}.md`;
+    a.download = fileName;
     a.click();
     URL.revokeObjectURL(url);
-  };
-
-  const emailAll = () => {
-    const body = toMarkdown(notes).slice(0, 1800);
-    window.location.href = `mailto:${REVIEW_EMAIL}?subject=${encodeURIComponent(
-      `Retours site — ${notes.length} note${notes.length > 1 ? 's' : ''}`,
-    )}&body=${encodeURIComponent(
-      `${body}\n\n---\n(Si la liste est coupée, utilise « Copier tout » sur le site.)`,
-    )}`;
+    setDownloaded(true);
   };
 
   const onThisPage = notes.filter((n) => n.path === pathname).length;
@@ -277,8 +261,9 @@ export default function FeedbackWidget() {
             </div>
           </div>
 
-          {/* Notes */}
-          <div className="flex-1 overflow-y-auto">
+          {/* Notes. The floor stops the list collapsing to nothing once the
+              post-download instructions expand the panel below it. */}
+          <div className="min-h-[7rem] flex-1 overflow-y-auto">
             {notes.length === 0 ? (
               <p className="p-4 text-xs text-ink/50">
                 Aucun retour pour l&apos;instant. Cliquez sur « Pointer un
@@ -315,33 +300,47 @@ export default function FeedbackWidget() {
           {/* Export */}
           {notes.length > 0 ? (
             <div className="border-t-2 border-ink p-3">
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={copyAll}
-                  className="flex-1 bg-flame px-3 py-2 text-xs font-semibold text-white"
-                >
-                  {copied ? 'Copié ✓' : 'Copier tout'}
-                </button>
-                <button
-                  type="button"
-                  onClick={download}
-                  className="border border-ink px-3 py-2 text-xs font-semibold text-ink"
-                >
-                  Fichier
-                </button>
-                <button
-                  type="button"
-                  onClick={emailAll}
-                  className="border border-ink px-3 py-2 text-xs font-semibold text-ink"
-                >
-                  Email
-                </button>
-              </div>
-              <p className="mt-2 text-[10px] leading-snug text-ink/50">
-                Les retours sont enregistrés dans ce navigateur uniquement.
-                Pensez à les envoyer avant de changer d&apos;appareil.
-              </p>
+              <button
+                type="button"
+                onClick={download}
+                className="w-full bg-flame px-3 py-2.5 text-xs font-semibold text-white"
+              >
+                {downloaded
+                  ? 'Télécharger à nouveau'
+                  : `Télécharger mes ${notes.length} retour${notes.length > 1 ? 's' : ''}`}
+              </button>
+
+              {downloaded ? (
+                <div className="mt-3 border border-ink/25 bg-white p-3">
+                  <p className="text-xs font-semibold text-ink">
+                    C&apos;est téléchargé — dernière étape !
+                  </p>
+                  <p className="mt-1.5 text-[11px] leading-relaxed text-ink/70">
+                    Le fichier <strong>{fileName}</strong> se trouve dans vos
+                    téléchargements. Envoyez-le simplement en pièce jointe à
+                    Gabriel :
+                  </p>
+                  <a
+                    href={`mailto:${REVIEW_EMAIL}?subject=${encodeURIComponent(
+                      'Mes retours sur le site',
+                    )}&body=${encodeURIComponent(
+                      `Bonjour Gabriel,\n\nVoici mes retours sur le site — le fichier est en pièce jointe.\n\n(N'oubliez pas de joindre ${fileName}, il est dans vos téléchargements.)\n\nBelle journée,\nSabrina`,
+                    )}`}
+                    className="mt-2 block bg-ink px-3 py-2 text-center text-xs font-semibold text-paper"
+                  >
+                    Écrire à {REVIEW_EMAIL}
+                  </a>
+                  <p className="mt-2 text-[10px] leading-snug text-ink/50">
+                    Le mail s&apos;ouvre pré-rempli : il ne reste qu&apos;à
+                    glisser le fichier dedans avant d&apos;envoyer.
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-2 text-[10px] leading-snug text-ink/50">
+                  Vos retours sont enregistrés dans ce navigateur uniquement.
+                  Téléchargez-les avant de changer d&apos;appareil.
+                </p>
+              )}
             </div>
           ) : null}
         </div>
