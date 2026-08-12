@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+
+# cached font download for the asset generator
+.devtools/.fontcache/
