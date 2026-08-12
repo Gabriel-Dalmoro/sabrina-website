@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-electric-blue: #4747F4;
+  --color-lemon-yellow: #FCFF97;
+  --color-neon-orange: #FF4F14;
+  --color-teal-mint: #0AAE98;
+  --color-pastel-lavender: #E6CEFC;
+  --color-dark: #12131A;
+  --color-bg-light: #FAF9F5;
+  --color-card-white: #FFFFFF;
+  
+  --font-anton: 'Anton', sans-serif;
+  --font-bodoni: 'Bodoni Moda', serif;
+  --font-script: 'Caveat', cursive;
+  --font-body: 'Outfit', sans-serif;
+}
+
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-dark);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Custom Typography Utilities */
+.font-anton {
+  font-family: var(--font-anton);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.font-bodoni {
+  font-family: var(--font-bodoni);
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* 80s Retro Pop Shadows & Badges */
+.pop-shadow {
+  box-shadow: 4px 4px 0px var(--color-dark);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pop-shadow-lg {
+  box-shadow: 7px 7px 0px var(--color-dark);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pop-shadow:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--color-dark);
+}
+
+.pop-shadow-lg:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 10px 10px 0px var(--color-dark);
+}
+
+.pop-shadow-blue {
+  box-shadow: 5px 5px 0px var(--color-electric-blue);
+}
+
+.pop-shadow-orange {
+  box-shadow: 5px 5px 0px var(--color-neon-orange);
+}
+
+.pop-border {
+  border: 2.5px solid var(--color-dark);
+}
+
+/* Sticker Pill Badge */
+.sticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  border: 2px solid var(--color-dark);
+  font-weight: 700;
+  font-size: 0.875rem;
+  box-shadow: 3px 3px 0px var(--color-dark);
+  transform: rotate(-1.5deg);
+  transition: transform 0.2s ease;
+}
+
+.sticker-badge:hover {
+  transform: rotate(1deg) scale(1.03);
+}
+
+/* Accent Gradients & Background Patterns */
+.grid-bg-pattern {
+  background-image: radial-gradient(#12131A 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
+}
+
+.glass-nav {
+  background: rgba(250, 249, 245, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--color-dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-electric-blue);
+  border-radius: 5px;
+  border: 2px solid var(--color-bg-light);
+}
