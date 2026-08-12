@@ -128,7 +128,7 @@ export default function AteliersPage() {
                 {WHAT_I_LIKE.map((item) => (
                   <li
                     key={item}
-                    className="border-t py-4 text-lg"
+                    className="border-t py-4"
                     style={{ borderColor: 'var(--rule)' }}
                   >
                     {item}
@@ -136,7 +136,7 @@ export default function AteliersPage() {
                 ))}
               </ul>
 
-              <p className="t-script mt-10 text-[clamp(1.75rem,4vw,2.75rem)]" style={{ color: 'var(--script)' }}>
+              <p className="t-script mt-10 t-script-md" style={{ color: 'var(--script)' }}>
                 Parce que chaque table l&apos;est aussi.
               </p>
             </div>

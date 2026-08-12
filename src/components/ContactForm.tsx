@@ -18,7 +18,7 @@ const SUBJECTS = [
 ];
 
 const FIELD =
-  't-ui w-full border-2 border-ink bg-transparent px-4 py-3.5 text-[0.9375rem] text-ink placeholder:text-ink/40 focus:border-flame focus:outline-none';
+  't-ui w-full border-2 border-ink bg-transparent px-4 py-3.5 t-small text-ink placeholder:text-ink/40 focus:border-flame focus:outline-none';
 
 const LABEL = 't-label mb-2 block';
 
@@ -93,7 +93,7 @@ export default function ContactForm({
 
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-8 block text-lg underline underline-offset-4"
+              className="mt-8 block underline underline-offset-4"
             >
               {CONTACT_EMAIL}
             </a>

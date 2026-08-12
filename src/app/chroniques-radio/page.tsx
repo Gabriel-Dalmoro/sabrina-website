@@ -2,6 +2,7 @@ import PageHero from '@/components/PageHero';
 import PhotoPlate from '@/components/PhotoPlate';
 import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
+import EpisodeList from '@/components/EpisodeList';
 import { PODCAST_URL } from '@/lib/nav';
 
 export const metadata = {
@@ -81,7 +82,7 @@ export default function RadioPage() {
 
               <Reveal>
                 <blockquote className="my-12 border-l-4 border-flame pl-6 sm:pl-8">
-                  <p className="t-script text-[clamp(1.75rem,4vw,2.75rem)] text-flame">
+                  <p className="t-script t-script-md text-flame">
                     Ce ne sont pas toujours les vins que nous dégustons qui
                     restent dans nos mémoires, mais les personnes avec
                     lesquelles nous les partageons.
@@ -93,7 +94,7 @@ export default function RadioPage() {
                 {CLOSING.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
-                <p className="t-script pt-4 text-[clamp(1.5rem,3.5vw,2.25rem)] text-electric">
+                <p className="t-script t-script-md pt-4 text-electric">
                   Bienvenue dans l&apos;univers des 400 Coups.
                 </p>
               </Reveal>
@@ -109,27 +110,57 @@ export default function RadioPage() {
                   sizes="(max-width: 1024px) 100vw, 38vw"
                 />
 
-                <a
-                  href={PODCAST_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn--solid mt-8 w-full justify-center"
-                >
-                  Écouter sur France Bleu
-                  <span aria-hidden="true">↗</span>
+                <a href="#episodes" className="btn btn--solid mt-8 w-full justify-center">
+                  Écouter les épisodes
                 </a>
-                <p className="t-ui mt-4 text-xs" style={{ color: 'var(--quiet)' }}>
-                  Tous les épisodes diffusés sont disponibles en replay sur le
-                  site de Radio France.
-                </p>
               </Reveal>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ── EPISODES ─────────────────────────────────────────────────────── */}
+      <section id="episodes" data-cw="ink" className="relative scroll-mt-20">
+        <span aria-hidden="true" className="grain-layer" />
+
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="t-label" style={{ color: 'var(--quiet)' }}>
+                Tous les épisodes
+              </p>
+              <h2
+                className="t-display mt-4 text-[length:var(--text-display-md)]"
+                style={{ color: 'var(--display)' }}
+              >
+                Seize chroniques
+              </h2>
+            </div>
+
+            <div className="lg:col-span-5">
+              <p className="t-lead">
+                Diffusées sur France Bleu Pays de Savoie pendant l&apos;été 2024.
+                Quatre minutes chacune, un vigneron ou une bouteille à la fois.
+              </p>
+              <a
+                href={PODCAST_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="t-label mt-5 inline-block underline underline-offset-4"
+              >
+                Voir sur Radio France ↗
+              </a>
+            </div>
+          </div>
+
+          <EpisodeList />
+        </div>
+      </section>
+
+      {/* Electric, not ink — it follows the episode list, and two adjacent
+          black sections read as one. */}
       {/* ── FOR STATIONS ─────────────────────────────────────────────────── */}
-      <section data-cw="ink" className="relative">
+      <section data-cw="electric" className="relative">
         <span aria-hidden="true" className="grain-layer" />
 
         <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-24">

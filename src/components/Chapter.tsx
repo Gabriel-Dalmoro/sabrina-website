@@ -69,7 +69,7 @@ export default function Chapter({
 
             {chapter.script ? (
               <p
-                className="t-script mt-2 text-[clamp(1.5rem,3.4vw,2.6rem)]"
+                className="t-script mt-2 t-script-md"
                 style={{ color: 'var(--script)' }}
               >
                 {chapter.script}
@@ -82,7 +82,7 @@ export default function Chapter({
               {chapter.points.map((point) => (
                 <li
                   key={point}
-                  className="flex items-baseline gap-3 border-t py-2.5 text-[0.9375rem]"
+                  className="flex items-baseline gap-3 border-t py-2.5 t-small"
                   style={{ borderColor: 'var(--rule)' }}
                 >
                   <span aria-hidden="true" className="shrink-0 opacity-60">

@@ -221,7 +221,7 @@ export default function HomePage() {
 
               <Reveal>
                 <blockquote className="my-14 border-l-4 border-flame pl-6 sm:pl-8">
-                  <p className="t-script text-[clamp(1.75rem,4.5vw,3rem)] text-flame">
+                  <p className="t-script t-script-lg text-flame">
                     Très tôt, je comprends que l&apos;hospitalité n&apos;est pas un
                     métier. C&apos;est une manière de vivre.
                   </p>
@@ -288,7 +288,7 @@ export default function HomePage() {
 
               <Reveal>
                 <p
-                  className="t-script mt-10 text-[clamp(2rem,6vw,4.25rem)] leading-[0.95]"
+                  className="t-script mt-10 t-script-lg leading-[0.95]"
                   style={{ color: 'var(--script)' }}
                 >
                   Les émotions que l&apos;on partage autour d&apos;une table.
@@ -336,7 +336,7 @@ export default function HomePage() {
                       <span className="t-label shrink-0" style={{ color: 'var(--accent)' }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="text-lg">{item}</span>
+                      <span >{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -344,7 +344,7 @@ export default function HomePage() {
 
               <Reveal>
                 <p className="t-lead measure mt-10">{CLOSING}</p>
-                <p className="t-script mt-8 text-[clamp(2rem,5vw,3.5rem)] text-electric">
+                <p className="t-script mt-8 t-script-lg text-electric">
                   Bienvenue dans mon univers.
                 </p>
               </Reveal>

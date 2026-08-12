@@ -66,7 +66,7 @@ export default function ContactPage() {
 
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="mt-8 block text-lg underline underline-offset-4"
+                className="mt-8 block underline underline-offset-4"
                 style={{ color: 'var(--accent)' }}
               >
                 {CONTACT_EMAIL}
@@ -91,7 +91,7 @@ export default function ContactPage() {
                     style={{ borderColor: 'var(--rule)' }}
                   >
                     <h3 className="t-label">{w.title}</h3>
-                    <p className="mt-2.5 text-[0.9375rem]" style={{ color: 'var(--quiet)' }}>
+                    <p className="mt-2.5 t-small" style={{ color: 'var(--quiet)' }}>
                       {w.body}
                     </p>
                   </li>

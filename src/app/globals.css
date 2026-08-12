@@ -251,9 +251,48 @@ body {
     font-style: normal;
   }
 
+  /*
+   * Three script sizes, and only three. Inside LayeredTitle the script is
+   * sized in `em` against the display type instead, so it always tracks the
+   * headline it crosses.
+   */
+  .t-script-sm {
+    font-size: clamp(1.25rem, 2.6vw, 1.875rem);
+  }
+
+  .t-script-md {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  }
+
+  .t-script-lg {
+    font-size: clamp(1.875rem, 5vw, 3.5rem);
+  }
+
+  /* ------------------------------------------------------------------------
+     The reading scale — exactly three steps.
+
+     Bodoni previously ran at 15/17/18/19/23px across the site, which read as
+     drift rather than hierarchy. Everything now resolves to small, body or
+     lead; anything that wants a fourth size wants one of these instead.
+     These set size and rhythm only — never font-family, so they compose with
+     `t-ui` on form fields without dragging them back to the serif.
+     ------------------------------------------------------------------------ */
+
+  /* 15px — list rows, captions under headings, secondary detail. */
+  .t-small {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* 17px — the default, inherited from body. Use to reset back to it. */
+  .t-body {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+
+  /* 19→23px — opening paragraphs and standfirsts. */
   .t-lead {
-    font-family: var(--font-serif);
-    font-size: clamp(1.125rem, 2vw, 1.4375rem);
+    font-size: clamp(1.1875rem, 2vw, 1.4375rem);
     line-height: 1.55;
     letter-spacing: -0.011em;
   }
@@ -321,11 +360,9 @@ body {
     text-wrap: pretty;
   }
 
-  /* First line of a narrative section, set larger to open the story. */
-  .prose-editorial > p:first-of-type {
-    font-size: 1.1875rem;
-    line-height: 1.6;
-  }
+  /* Opening paragraphs are promoted with `t-lead` at the call site rather
+     than by an automatic first-of-type bump, which produced a fourth body
+     size in the middle of otherwise even prose. */
 
   /* --------------------------------------------------------------------------
      Flat primitives — no radii, no shadows, no glass

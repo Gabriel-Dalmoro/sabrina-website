@@ -3,6 +3,7 @@ import './globals.css';
 import { fontVariables } from '@/lib/fonts';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import FeedbackWidget from '@/components/FeedbackWidget';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sabrinacarlier.fr'),
@@ -51,6 +52,9 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        {/* Review tool for Sabrina — remove this line before the site goes
+            public. See components/FeedbackWidget.tsx. */}
+        <FeedbackWidget />
       </body>
     </html>
   );

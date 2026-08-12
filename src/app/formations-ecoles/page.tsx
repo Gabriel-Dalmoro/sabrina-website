@@ -89,7 +89,7 @@ export default function FormationsPage() {
             </div>
 
             <div className="lg:col-span-5">
-              <p className="t-script text-[clamp(1.5rem,3.5vw,2.5rem)]" style={{ color: 'var(--script)' }}>
+              <p className="t-script t-script-md" style={{ color: 'var(--script)' }}>
                 On n&apos;enseigne bien que ce qu&apos;on a vraiment fait.
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function FormationsPage() {
                       {domain.items.map((item) => (
                         <li
                           key={item}
-                          className="border-t py-2.5 text-[0.9375rem]"
+                          className="border-t py-2.5 t-small"
                           style={{ borderColor: 'var(--rule)' }}
                         >
                           {item}

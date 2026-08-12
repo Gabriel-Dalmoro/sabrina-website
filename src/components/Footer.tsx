@@ -71,7 +71,7 @@ export default function Footer() {
 
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-6 block text-lg hover:underline"
+              className="mt-6 block hover:underline"
               style={{ color: 'var(--script)' }}
             >
               {CONTACT_EMAIL}
@@ -88,7 +88,17 @@ export default function Footer() {
           style={{ borderColor: 'var(--rule)', color: 'var(--quiet)' }}
         >
           <p>© {new Date().getFullYear()} Sabrina Carlier</p>
-          <p>Le vin est bien plus qu&apos;une boisson. Il est un souvenir.</p>
+          <p>
+            Site créé par{' '}
+            <a
+              href="https://www.gabrieldalmoro.com/fr/chef"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 transition-colors hover:text-paper"
+            >
+              Gabriel Dalmoro
+            </a>
+          </p>
         </div>
       </div>
     </footer>

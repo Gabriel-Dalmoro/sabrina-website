@@ -143,7 +143,7 @@ export default function ConferencesPage() {
                   ))}
                 </ul>
 
-                <p className="t-script mt-10 text-[clamp(1.5rem,3.5vw,2.5rem)] text-flame">
+                <p className="t-script mt-10 t-script-md text-flame">
                   Chaque représentation pourra être différente.
                 </p>
               </Reveal>

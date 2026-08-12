@@ -39,7 +39,7 @@ export default function PageHero({
         {/* Top-aligned: the photo is taller than the text block, and bottom
             aligning it left a dead void above every page title. */}
         <div className="mt-8 grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-14">
-          <div className={photo ? 'lg:col-span-7' : 'lg:col-span-9'}>
+          <div className={photo ? 'lg:col-span-7 lg:col-start-1' : 'lg:col-span-9'}>
             <LayeredTitle
               as="h1"
               lines={lines}
@@ -53,14 +53,19 @@ export default function PageHero({
           </div>
 
           {photo ? (
-            <div className="lg:col-span-5">
+            /*
+             * Narrower column and a squarer crop than the text block wants:
+             * at col-span-5 / 4:5 the photo ran far taller than the title and
+             * lead beside it, leaving a dead gap under every page heading.
+             */
+            <div className="lg:col-span-4 lg:col-start-9">
               <PhotoPlate
                 src={photo.src}
                 alt={photo.alt}
                 duo={photo.duo ?? 'none'}
-                ratio="aspect-[4/5]"
+                ratio="aspect-[5/4] lg:aspect-square"
                 priority
-                sizes="(max-width: 1024px) 100vw, 40vw"
+                sizes="(max-width: 1024px) 100vw, 30vw"
               />
             </div>
           ) : null}
