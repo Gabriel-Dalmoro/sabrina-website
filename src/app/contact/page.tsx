@@ -1,104 +1,106 @@
+import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
-import { Mail, MapPin, Radio } from 'lucide-react';
+import { CONTACT_EMAIL, PODCAST_URL } from '@/lib/nav';
 
 export const metadata = {
-  title: 'Contact - Sabrina Carlier | Sommelerie & Émotions',
-  description: 'Contactez Sabrina Carlier pour vos projets radio, ateliers dégustation B2B, interventions en écoles supérieures ou conférences.',
+  title: 'Contact',
+  description:
+    "Contacter Sabrina Carlier pour un atelier, un dîner en entreprise, une intervention en école, une chronique radio ou une conférence.",
 };
+
+const WHO = [
+  {
+    title: 'Entreprises & équipes',
+    body: 'Ateliers, wine dinners, séminaires, soirées clients, team building autour du vin.',
+  },
+  {
+    title: 'Écoles & organismes de formation',
+    body: 'Hospitalité, management, sommellerie, entrepreneuriat — interventions ponctuelles ou cycles.',
+  },
+  {
+    title: 'Radios & médias',
+    body: 'Chroniques courtes, portraits de vignerons, thématiques de saison.',
+  },
+  {
+    title: 'Scènes, théâtres & festivals',
+    body: '« Le vin, vecteur d’émotion » — à partir de l’automne 2026.',
+  },
+  {
+    title: 'Établissements',
+    body: "Missions de transition, ouvertures, cartes des vins, accompagnement d'équipes.",
+  },
+];
 
 export default function ContactPage() {
   return (
-    <div className="space-y-20 py-12 pb-24">
-      
-      {/* HERO BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FF4F14] text-white p-10 sm:p-14 rounded-3xl shadow-xl relative overflow-hidden">
-          <div className="max-w-3xl space-y-4">
-            <span className="badge-pill badge-pill-yellow">
-              <Mail className="w-3.5 h-3.5 text-[#FF4F14]" /> ÉCRIVEZ-MOI
-            </span>
-            <h1 className="font-bodoni text-4xl sm:text-6xl font-bold tracking-tight text-white leading-none">
-              CONTACT & COLLABORATION
-            </h1>
-            <p className="font-script text-2xl text-[#FCFF97] font-semibold">
-              Une envie d&apos;atelier, une intervention en école, une émission ou une conférence ?
-            </p>
-            <p className="text-orange-100 text-sm sm:text-base leading-relaxed">
-              Sabrina Carlier étudie chaque proposition avec attention pour créer une expérience authentique et sur-mesure.
-            </p>
-          </div>
-        </div>
-      </section>
+    <>
+      <PageHero
+        colorway="flame"
+        kicker="Écrivez-moi"
+        lines={['On en', 'parle ?']}
+        script="j'étudie tout"
+        scriptX="10%"
+        scriptScale={0.44}
+        scriptAvailable="min(calc(100vw - 3rem), 26rem)"
+        lead="Une envie, une date, un lieu, un budget encore flou — écrivez quand même. Le pire qui puisse arriver, c'est une bonne conversation."
+        photo={{
+          src: '/photos/sabrina_photo_43.jpg',
+          alt: 'Sabrina Carlier entourée de son équipe, sourires en fin de service',
+        }}
+      />
 
-      {/* FORM & SIDEBAR */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
-          {/* Main Contact Form */}
-          <div className="lg:col-span-8">
-            <ContactForm defaultSubject="Ateliers Dégustation B2B" />
-          </div>
+      <ContactForm />
 
-          {/* Sidebar Info */}
-          <div className="lg:col-span-4 space-y-6">
-            
-            {/* Email Card */}
-            <div className="card-modern p-7 space-y-4">
-              <div className="w-10 h-10 bg-[#4747F4] text-white rounded-xl flex items-center justify-center shadow-sm">
-                <Mail className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-anton text-[#4747F4] tracking-widest uppercase block">EMAIL PROFESSIONNEL</span>
-                <a
-                  href="mailto:hello@sabrinacarlier.fr"
-                  className="font-bodoni font-bold text-xl text-[#161720] hover:text-[#FF4F14] transition-colors block break-all mt-1"
-                >
-                  hello@sabrinacarlier.fr
-                </a>
-              </div>
-              <p className="text-xs text-gray-500">
-                Réponse garantie sous 24h à 48h ouvrées.
+      {/* ── WHO WRITES ───────────────────────────────────────────────────── */}
+      <section data-cw="paper" className="relative">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-24">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-4">
+              <h2 className="t-display text-[length:var(--text-display-sm)]">
+                Qui m&apos;écrit
+              </h2>
+              <p className="t-lead mt-6" style={{ color: 'var(--quiet)' }}>
+                Basée à Lyon. Interventions régulières en Rhône-Alpes, à Genève,
+                à Paris et partout où il y a une table.
               </p>
-            </div>
 
-            {/* Location Card */}
-            <div className="card-modern p-7 space-y-4">
-              <div className="w-10 h-10 bg-[#0AAE98] text-white rounded-xl flex items-center justify-center shadow-sm">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs font-anton text-[#0AAE98] tracking-widest uppercase block">BASE & DÉPLACEMENTS</span>
-                <h3 className="font-bodoni font-bold text-xl text-[#161720] mt-1">LYON, FRANCE & SUISSE</h3>
-              </div>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                Basée à Lyon. Interventions régulières en région Rhône-Alpes, Genève, Paris et toute la France.
-              </p>
-            </div>
-
-            {/* Media Card */}
-            <div className="bg-[#FCFF97] p-7 rounded-3xl space-y-3 shadow-sm">
-              <div className="flex items-center gap-2">
-                <Radio className="w-4 h-4 text-[#FF4F14]" />
-                <span className="font-bodoni font-bold text-base text-[#161720]">PRESSE & MÉDIAS</span>
-              </div>
-              <p className="text-xs text-gray-800">
-                Retrouvez &quot;Les 400 Coups&quot; diffusés sur France Bleu et disponibles en replay.
-              </p>
               <a
-                href="https://www.radiofrance.fr/francebleu/podcasts/les-400-coups-4969189"
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="mt-8 block text-lg underline underline-offset-4"
+                style={{ color: 'var(--accent)' }}
+              >
+                {CONTACT_EMAIL}
+              </a>
+
+              <a
+                href={PODCAST_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-xs font-anton text-[#4747F4] hover:underline pt-1"
+                className="t-label mt-6 block underline underline-offset-4"
               >
-                Écouter le podcast →
+                Écouter « Les 400 Coups » ↗
               </a>
             </div>
 
+            <div className="lg:col-span-8">
+              <ul className="grid gap-x-12 sm:grid-cols-2">
+                {WHO.map((w) => (
+                  <li
+                    key={w.title}
+                    className="border-t py-5"
+                    style={{ borderColor: 'var(--rule)' }}
+                  >
+                    <h3 className="t-label">{w.title}</h3>
+                    <p className="mt-2.5 text-[0.9375rem]" style={{ color: 'var(--quiet)' }}>
+                      {w.body}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-
         </div>
       </section>
-
-    </div>
+    </>
   );
 }

@@ -1,24 +1,30 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { fontVariables } from '@/lib/fonts';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Sabrina Carlier | Sommelerie, Chroniques Radio & Dégustations sur-mesure',
-  description: 'Site officiel de Sabrina Carlier. Sommelier d\'émotion, chroniqueuse radio ("Les 400 Coups" sur France Bleu), créatrice d\'ateliers dégustation B2B, conférencière et intervenante en écoles d\'hospitalité.',
+  metadataBase: new URL('https://sabrinacarlier.fr'),
+  title: {
+    default: "Sabrina Carlier — Sommellerie, chroniques radio & expériences autour du vin",
+    template: '%s — Sabrina Carlier',
+  },
+  description:
+    "Trente ans d'hospitalité. Chroniqueuse des « 400 Coups » sur France Bleu, créatrice d'ateliers et de dîners autour du vin, intervenante en écoles supérieures et conférencière.",
   keywords: [
     'Sabrina Carlier',
-    'Sommelier Lyon',
-    'Chroniques Radio Vin',
+    'sommelière Lyon',
     'Les 400 Coups France Bleu',
-    'Ateliers Dégustation B2B',
-    'Conférence Vin Émotion',
-    'Formation Hospitalité',
+    'atelier dégustation entreprise',
+    'conférence vin',
+    'formation hospitalité',
     'ISG Luxury Management',
   ],
   openGraph: {
-    title: 'Sabrina Carlier | Sommelerie, Chroniques Radio & Émotions',
-    description: 'Sommelier humaine, authentique & vibrante. Découvrez les chroniques Les 400 Coups, les dégustations B2B et les conférences.',
+    title: 'Sabrina Carlier — Sommellerie, radio & expériences autour du vin',
+    description:
+      "L'hospitalité n'est pas un métier, c'est une manière de vivre. Trente ans de terrain, de rencontres et d'émotions partagées autour d'une table.",
     url: 'https://sabrinacarlier.fr',
     siteName: 'Sabrina Carlier',
     locale: 'fr_FR',
@@ -32,10 +38,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="scroll-smooth">
-      <body className="antialiased flex flex-col min-h-screen">
+    <html lang="fr" className={fontVariables}>
+      <body className="flex min-h-screen flex-col bg-paper text-ink">
+        <a
+          href="#contenu"
+          className="t-label sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-ink focus:px-4 focus:py-3 focus:text-paper"
+        >
+          Aller au contenu
+        </a>
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main id="contenu" className="flex-grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

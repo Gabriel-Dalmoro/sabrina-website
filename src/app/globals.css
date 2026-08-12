@@ -1,132 +1,555 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-:root {
-  --color-electric-blue: #4747F4;
-  --color-lemon-yellow: #FCFF97;
-  --color-neon-orange: #FF4F14;
-  --color-teal-mint: #0AAE98;
-  --color-pastel-lavender: #E6CEFC;
-  --color-dark: #12131A;
-  --color-bg-cream: #FAF8F5;
-  --color-card-white: #FFFFFF;
+/* ==========================================================================
+   Sabrina Carlier — design system
+   Built from the charte graphique and the Les 400 Coups artwork.
 
-  --font-bodoni: 'Bodoni Moda', Georgia, serif;
-  --font-anton: 'Anton', sans-serif;
-  --font-script: 'Caveat', cursive;
-  --font-body: 'Outfit', sans-serif;
+   The whole language comes from one move in that artwork: an enormous flat
+   Anton headline with the brush script laid diagonally across it, over a
+   grainy photo. Everything else — flat colour grounds, no rounded cards, no
+   shadows — exists to keep that move loud.
+   ========================================================================== */
+
+@theme {
+  /* Charte graphique. Names avoid Tailwind's built-in colour scales. */
+  --color-electric: #4747f4; /* blue     */
+  --color-lemon: #fcff97;    /* yellow   */
+  --color-flame: #ff4f14;    /* orange   */
+  --color-mint: #0aae98;     /* teal     */
+  --color-lilac: #e6cefc;    /* lavender */
+
+  --color-ink: #12131a;
+  --color-paper: #faf8f5;
+
+  /*
+   * #FF4F14 is only 3.10:1 on paper — fine for display type, a fail for
+   * anything under 24px. This is the same orange darkened to 80%, the point
+   * at which it clears 4.5:1 on paper, lemon and white. Use it for small
+   * accents (labels, dates, list markers); use --color-flame for display.
+   */
+  --color-flame-deep: #cc3f10;
+
+  /* Same idea for blue: #4747F4 is 4.20:1 on lavender, just short of 4.5. */
+  --color-electric-deep: #4343e5;
+
+  --font-display: var(--font-anton), "Haettenschweiler", Impact, sans-serif;
+  --font-serif: var(--font-bodoni), Georgia, "Times New Roman", serif;
+  --font-script: var(--font-hey), "Brush Script MT", cursive;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Anton is condensed; these are the sizes it actually looks good at. */
+  --text-display-xl: clamp(3.25rem, 12.5vw, 10.5rem);
+  --text-display-lg: clamp(2.5rem, 8.5vw, 6.5rem);
+  --text-display-md: clamp(1.875rem, 5vw, 3.75rem);
+  --text-display-sm: clamp(1.375rem, 3vw, 2.125rem);
+}
+
+/* --------------------------------------------------------------------------
+   Colourways
+
+   Each is a flat ground plus two brand colours layered on it. Three contrast
+   relationships have to hold, not two — the script crosses the display type,
+   so it needs separation from the *caps* as well as from the ground:
+   display/ground ≥ 3:1, script/ground ≥ 3:1, script/display ≥ 3:1. Body ink
+   is held to 4.5:1 throughout.
+
+   That third constraint is what rules out most "two bright colours" pairs:
+   lemon on lilac is 1.36:1, flame on electric is 1.84:1. The pattern that
+   survives is a bright display with the script in the opposite polarity —
+   which is exactly what the Les 400 Coups artwork does.
+
+   Teal is the one ground where no third colour clears 3:1 against both it and
+   near-black, so `mint` carries display type only and no script. Passing a
+   script to LayeredTitle inside a mint section is a mistake.
+   -------------------------------------------------------------------------- */
+
+[data-cw] {
+  background-color: var(--ground);
+  color: var(--body);
+}
+
+/* Black caps, orange script.        17.47 / 3.10 / 5.63 */
+[data-cw="paper"] {
+  --ground: var(--color-paper);
+  --display: var(--color-ink);
+  --script: var(--color-flame);
+  --body: var(--color-ink);
+  --accent: var(--color-flame-deep);
+  --rule: rgb(18 19 26 / 0.14);
+  --quiet: rgb(18 19 26 / 0.62);
+}
+
+/* Yellow caps, orange script, on black — the "coup de grâce" lockup.
+                                     17.54 / 5.63 / 3.12 */
+[data-cw="ink"] {
+  --ground: var(--color-ink);
+  --display: var(--color-lemon);
+  --script: var(--color-flame);
+  --body: var(--color-paper);
+  --accent: var(--color-flame);
+  --rule: rgb(250 248 245 / 0.18);
+  --quiet: rgb(250 248 245 / 0.68);
+}
+
+/* Yellow caps, black script, on blue. 5.72 / 3.07 / 17.54 */
+[data-cw="electric"] {
+  --ground: var(--color-electric);
+  --display: var(--color-lemon);
+  --script: var(--color-ink);
+  --body: var(--color-paper);
+  --accent: var(--color-lemon);
+  --rule: rgb(250 248 245 / 0.24);
+  --quiet: rgb(250 248 245 / 0.86);
+}
+
+/* Orange caps, black script, on yellow — charte tile 4.
+                                      3.12 / 17.54 / 5.63 */
+[data-cw="lemon"] {
+  --ground: var(--color-lemon);
+  --display: var(--color-flame);
+  --script: var(--color-ink);
+  --body: var(--color-ink);
+  --accent: var(--color-flame-deep);
+  --rule: rgb(18 19 26 / 0.18);
+  --quiet: rgb(18 19 26 / 0.66);
+}
+
+/* Blue caps, black script, on lavender. 4.20 / 12.88 / 3.07 */
+[data-cw="lilac"] {
+  --ground: var(--color-lilac);
+  --display: var(--color-electric);
+  --script: var(--color-ink);
+  --body: var(--color-ink);
+  --accent: var(--color-electric-deep);
+  --rule: rgb(18 19 26 / 0.18);
+  --quiet: rgb(18 19 26 / 0.66);
+}
+
+/*
+ * Teal carries near-black only — white on #0AAE98 is 2.79:1, and no third
+ * colour clears 3:1 against both teal and ink. Display type only, no script.
+ */
+[data-cw="mint"] {
+  --ground: var(--color-mint);
+  --display: var(--color-ink);
+  --script: var(--color-ink);
+  --body: var(--color-ink);
+  --accent: var(--color-ink);
+  --rule: rgb(18 19 26 / 0.22);
+  --quiet: rgb(18 19 26 / 0.78);
+}
+
+/* Black caps, yellow script, on orange. 5.63 / 3.12 / 17.54 */
+[data-cw="flame"] {
+  --ground: var(--color-flame);
+  --display: var(--color-ink);
+  --script: var(--color-lemon);
+  --body: var(--color-ink);
+  --accent: var(--color-ink);
+  --rule: rgb(18 19 26 / 0.22);
+  --quiet: rgb(18 19 26 / 0.82);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+:root {
+  --ground: var(--color-paper);
+  --body: var(--color-ink);
+  --display: var(--color-ink);
+  --script: var(--color-electric);
+  --rule: rgb(18 19 26 / 0.14);
+  --quiet: rgb(18 19 26 / 0.62);
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Rotated type and offset colour blocks push past the viewport edge.
+     `clip` contains them without creating a scroll container the way
+     `hidden` does — so position:sticky still works in the header. */
+  overflow-x: clip;
 }
 
 body {
-  background-color: var(--color-bg-cream);
-  color: var(--color-dark);
-  font-family: var(--font-body);
-  overflow-x: hidden;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  /* Bodoni's hairlines thin out badly as it scales up. Optical sizing keeps
+     small text sturdy and large text elegant without any manual tuning. */
+  font-optical-sizing: auto;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Typography Classes */
-.font-bodoni {
-  font-family: var(--font-bodoni);
+::selection {
+  background: var(--color-lemon);
+  color: var(--color-ink);
 }
 
-.font-anton {
-  font-family: var(--font-anton);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+:focus-visible {
+  outline: 3px solid var(--color-electric);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-.font-script {
-  font-family: var(--font-script);
+[data-cw="electric"] :focus-visible,
+[data-cw="ink"] :focus-visible {
+  outline-color: var(--color-lemon);
 }
 
-/* Funky Elegant Badges */
-.badge-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  border-radius: 9999px;
-  font-family: var(--font-anton);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* --------------------------------------------------------------------------
+   Component primitives
+
+   Wrapped in `@layer components` so Tailwind utilities always win against
+   them. Without this, `.btn { display: inline-flex }` silently beats
+   `hidden` and `flex` in the markup — utilities and unlayered rules have the
+   same specificity, so the later one wins, and this file is imported after
+   Tailwind.
+   -------------------------------------------------------------------------- */
+
+@layer components {
+  /* --------------------------------------------------------------------------
+     Type primitives
+     -------------------------------------------------------------------------- */
+
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.86;
+    letter-spacing: -0.005em;
+    /* Anton's caps sit high in the em box; trim the slack so flat colour blocks
+       hug the letterforms instead of floating around them. */
+    text-box: trim-both cap alphabetic;
+  }
+
+  @supports not (text-box: trim-both cap alphabetic) {
+    .t-display {
+      letter-spacing: 0;
+    }
+  }
+
+  /* Small Anton labels — kickers, nav, buttons. Needs tracking to breathe. */
+  .t-label {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    font-size: 0.6875rem;
+  }
+
+  .t-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    line-height: 0.92;
+    /* Hey October is drawn on a slant already; no synthetic italic. */
+    font-style: normal;
+  }
+
+  .t-lead {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 2vw, 1.4375rem);
+    line-height: 1.55;
+    letter-spacing: -0.011em;
+  }
+
+  /* Utility sans — form fields, captions, fine print. Should go unnoticed. */
+  .t-ui {
+    font-family: var(--font-sans);
+    letter-spacing: -0.006em;
+  }
+
+  /* --------------------------------------------------------------------------
+     The signature: layered display + script
+     -------------------------------------------------------------------------- */
+
+  .layered {
+    position: relative;
+    display: block;
+    /*
+     * Reserve room for the script's overhang. Without this the rotated script
+     * hangs into whatever follows — and because it sits at the bottom of the
+     * block, it also buried the last display line rather than crossing it.
+     *
+     * In the artwork the script only clips the bottom edge of the caps — it
+     * does not cross their middle. Padding by ~0.8× the script size lands it
+     * there; at 0.55 it swallowed the last line.
+     */
+    padding-bottom: calc(var(--script-size, 0.5em) * 0.8);
+  }
+
+  .layered__display {
+    display: block;
+    color: var(--display);
+  }
+
+  .layered__script {
+    position: absolute;
+    left: var(--script-x, 4%);
+    bottom: var(--script-y, 0);
+    z-index: 2;
+    color: var(--script);
+    font-size: var(--script-size, 0.52em);
+    transform: rotate(var(--script-rot, -4.5deg));
+    transform-origin: left center;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* --------------------------------------------------------------------------
+     Reading column
+     -------------------------------------------------------------------------- */
+
+  .measure {
+    max-width: 34rem; /* ~66 characters at 17px Bodoni */
+  }
+
+  .measure-wide {
+    max-width: 46rem;
+  }
+
+  .prose-editorial > p + p {
+    margin-top: 1.15em;
+  }
+
+  .prose-editorial p {
+    text-wrap: pretty;
+  }
+
+  /* First line of a narrative section, set larger to open the story. */
+  .prose-editorial > p:first-of-type {
+    font-size: 1.1875rem;
+    line-height: 1.6;
+  }
+
+  /* --------------------------------------------------------------------------
+     Flat primitives — no radii, no shadows, no glass
+     -------------------------------------------------------------------------- */
+
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.0625rem 1.75rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+    border: 2px solid currentColor;
+    transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  }
+
+  .btn:hover {
+    transform: translate(-2px, -2px);
+  }
+
+  .btn--solid {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
+  }
+
+  .btn--solid:hover {
+    background: var(--color-flame);
+    border-color: var(--color-flame);
+    color: var(--color-paper);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--body);
+  }
+
+  .btn--ghost:hover {
+    background: var(--body);
+    color: var(--ground);
+  }
+
+  /* A flat colour chip. Replaces the old rounded "badge-pill". */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.8rem;
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* --------------------------------------------------------------------------
+     Texture — grain and duotone
+     -------------------------------------------------------------------------- */
+
+  /*
+   * Fine film grain. Keeps flat colour from reading as sterile vector fill.
+   *
+   * Applied to a dedicated child element rather than a pseudo-element: the
+   * duotone treatment below already occupies both ::before and ::after, and a
+   * grain pseudo on the same node would silently fight it.
+   */
+  .grain-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    opacity: 0.42;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /*
+   * Duotone, the Les 400 Coups photo treatment. Used only where display type
+   * sits on a photo — gallery and portrait images stay in full colour so the
+   * candid photography reads as real.
+   *
+   * `color` takes hue and saturation from the overlay and luminosity from the
+   * image below, so a desaturated photo becomes a clean monotone with every
+   * midtone intact. The obvious multiply-dark-then-screen-bright recipe does
+   * the opposite: it crushes the midtones and the photo goes flat.
+   */
+  .duotone {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .duotone img {
+    filter: grayscale(1) contrast(1.15) brightness(1.02);
+  }
+
+  .duotone::before,
+  .duotone::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  /*
+   * next/image `fill` makes the <img> position:absolute, so all three layers sit
+   * at z-index auto and paint in DOM order — which would put ::before *under*
+   * the image and blend it with the page instead. The explicit stack fixes that:
+   * image (0) → multiply (1) → screen (2) → grain (3).
+   */
+  .duotone img {
+    z-index: 0;
+  }
+
+  /* Hue and saturation of the brand colour, luminosity of the photograph. */
+  .duotone::before {
+    z-index: 1;
+    background: var(--duo-light, var(--color-electric));
+    mix-blend-mode: color;
+  }
+
+  /* Deepens the shadows so the monotone does not read as a flat wash. */
+  .duotone::after {
+    z-index: 2;
+    background: var(--duo-shadow, var(--color-ink));
+    mix-blend-mode: multiply;
+    opacity: var(--duo-strength, 0.22);
+  }
+
+  /* --------------------------------------------------------------------------
+     Marquee ticker
+     -------------------------------------------------------------------------- */
+
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: var(--marquee-gap, 2.5rem);
+  }
+
+  .marquee__track {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--marquee-gap, 2.5rem);
+    min-width: 100%;
+    animation: marquee-scroll var(--marquee-duration, 38s) linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* Shift by one full track plus the gap that follows it, so the second
+         copy lands exactly where the first began. */
+      transform: translateX(calc(-100% - var(--marquee-gap, 2.5rem)));
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Scroll reveal
+     -------------------------------------------------------------------------- */
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal[data-shown="true"] {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.badge-pill:hover {
-  transform: translateY(-1px) scale(1.02);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee__track {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
-.badge-pill-blue {
-  background-color: var(--color-electric-blue);
-  color: #ffffff;
-}
+/* --------------------------------------------------------------------------
+   Scrollbar
+   -------------------------------------------------------------------------- */
 
-.badge-pill-yellow {
-  background-color: var(--color-lemon-yellow);
-  color: var(--color-dark);
-}
-
-.badge-pill-orange {
-  background-color: var(--color-neon-orange);
-  color: #ffffff;
-}
-
-.badge-pill-lavender {
-  background-color: var(--color-pastel-lavender);
-  color: var(--color-dark);
-}
-
-.badge-pill-teal {
-  background-color: var(--color-teal-mint);
-  color: #ffffff;
-}
-
-/* Card Elevation & Hover Glows */
-.card-funky-chic {
-  background: #ffffff;
-  border-radius: 1.5rem;
-  border: 1px solid rgba(18, 19, 26, 0.08);
-  box-shadow: 0 12px 35px -8px rgba(18, 19, 26, 0.04);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.card-funky-chic:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 25px 50px -12px rgba(71, 71, 244, 0.15);
-  border-color: rgba(71, 71, 244, 0.3);
-}
-
-/* Funky Gradient Accents */
-.gradient-funky-hero {
-  background: radial-gradient(circle at 10% 20%, rgba(230, 206, 252, 0.5) 0%, rgba(252, 255, 151, 0.4) 40%, rgba(250, 248, 245, 1) 90%);
-}
-
-.gradient-funky-blue {
-  background: linear-gradient(135deg, #4747F4 0%, #3232C8 100%);
-}
-
-.gradient-funky-orange {
-  background: linear-gradient(135deg, #FF4F14 0%, #E03E05 100%);
-}
-
-/* Header Glassmorphism */
-.header-glass {
-  background: rgba(250, 248, 245, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(18, 19, 26, 0.08);
-}
-
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-cream);
+  background: var(--color-ink);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--color-electric-blue);
-  border-radius: 4px;
+  background: var(--color-lemon);
 }

@@ -1,311 +1,415 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, Radio, Users, GraduationCap, Mic, Sparkles, Heart, Award, FileText, Smile, CheckCircle2, Coffee, Flame } from 'lucide-react';
+import LayeredTitle from '@/components/LayeredTitle';
+import PhotoPlate from '@/components/PhotoPlate';
+import Marquee from '@/components/Marquee';
+import Reveal from '@/components/Reveal';
+import Chapter, { type ChapterData } from '@/components/Chapter';
 import PhotoGallery from '@/components/PhotoGallery';
+import { CONTACT_EMAIL } from '@/lib/nav';
+import {
+  OPENING,
+  AFTER_FIRST_QUOTE,
+  THIRTY_YEARS,
+  A_RESTAURANT_IS,
+  TODAY_INTRO,
+  TODAY_LIST,
+  CLOSING,
+} from '@/content/presentation';
+
+const CHAPTERS: ChapterData[] = [
+  {
+    number: '01',
+    audience: 'Radios & médias',
+    title: 'Les 400 Coups',
+    script: 'la chronique',
+    body: "Des histoires de vignerons, de bouteilles et de territoires, diffusées sur France Bleu. Le vin raconté sans jargon ni nappe blanche — avec curiosité, liberté et émotion.",
+    points: [
+      'Chroniques courtes, de 2 à 5 minutes',
+      'Thématiques de saison, accords et pairings',
+      'Portraits de vignerons et de maisons',
+    ],
+    href: '/chroniques-radio',
+    cta: 'Écouter la chronique',
+    photo: '/photos/sabrina_photo_36.jpg',
+    alt: "Micro France Bleu dans le studio d'enregistrement des 400 Coups",
+    colorway: 'electric',
+    duo: 'none',
+  },
+  {
+    number: '02',
+    audience: 'Entreprises & groupes',
+    title: 'Bienvenue à ma table',
+    script: 'ateliers & dîners',
+    body: "Des dîners en forêt, dans un potager, à 2 500 mètres d'altitude. Des ateliers pour quatre personnes, des wine dinners pour cent. Aucun format figé, aucune recette : réunir des gens autour d'une table et goûter.",
+    points: [
+      'Ateliers dégustation, de 4 à 60 personnes',
+      "Wine dinners et dîners à quatre mains avec un chef",
+      'Soirées clients, séminaires et team building',
+      'Vignerons et producteurs invités à table',
+    ],
+    href: '/ateliers-degustation',
+    cta: 'Voir les expériences',
+    photo: '/photos/sabrina_photo_54.jpg',
+    alt: 'Longue tablée de convives lors d’un wine dinner dans une cave voûtée',
+    colorway: 'lemon',
+    duo: 'none',
+  },
+  {
+    number: '03',
+    audience: 'Écoles & équipes',
+    title: 'Écoles & formations',
+    // No script: the mint colourway carries display type only.
+    body: "Hospitalité, management, sommellerie, entrepreneuriat. Intervenante à l'ISG Luxury Management de Lyon et de Genève, et auprès des équipes qui veulent remettre l'accueil au centre.",
+    points: [
+      "Hospitalité et expérience client",
+      'Management, recrutement et culture d’équipe',
+      'Sommellerie, dégustation et carte des vins',
+      "Entrepreneuriat et ouverture d'établissement",
+    ],
+    href: '/formations-ecoles',
+    cta: "Voir les domaines d'intervention",
+    photo: '/photos/sabrina_photo_01.jpg',
+    alt: 'Sabrina Carlier face à une promotion d’étudiants en salle de cours',
+    colorway: 'mint',
+    duo: 'none',
+  },
+  {
+    number: '04',
+    audience: 'Scènes, entreprises & festivals',
+    title: "Le vin, vecteur d'émotion",
+    script: 'la conférence',
+    body: "Pourquoi certains vins nous bouleversent-ils alors que nous sommes incapables de nous souvenir de leur cépage ? Une conférence-expérience en création, mêlant récit, dégustation et rencontres.",
+    points: [
+      'Récit, dégustation et échanges avec le public',
+      'Première en entreprise à l’automne 2026',
+      'Programmation publique à partir de janvier 2027',
+    ],
+    href: '/conferences',
+    cta: 'Découvrir la conférence',
+    photo: '/photos/sabrina_photo_58.jpg',
+    alt: 'Sabrina Carlier prenant la parole devant un public assis',
+    colorway: 'lilac',
+    duo: 'none',
+  },
+];
+
+const TICKER = [
+  'France Bleu',
+  'Les 400 Coups',
+  'ISG Luxury Management',
+  '30 ans de terrain',
+  'Lyon & Genève',
+  'Maisons étoilées',
+  'Wine dinners',
+  'Conférences',
+];
 
 export default function HomePage() {
   return (
-    <div className="space-y-24 pb-20">
-      
-      {/* HERO SECTION: WOW EFFECT + WARMTH + CLARITY */}
-      <section className="relative pt-12 pb-20 overflow-hidden gradient-funky-hero border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6">
-              
-              {/* Funky Badges */}
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="badge-pill badge-pill-yellow shadow-sm">
-                  <Smile className="w-3.5 h-3.5 text-[#FF4F14]" /> FUNK, JOIE & SOMMELLERIE
-                </span>
-                <span className="badge-pill badge-pill-blue shadow-sm">
-                  30 ANS DE PASSION & DE TERRAIN
-                </span>
-              </div>
+    <>
+      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      <section data-cw="ink" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
 
-              {/* Bold Bodoni Headline */}
-              <h1 className="font-bodoni text-5xl sm:text-6xl xl:text-7xl font-bold tracking-tight text-[#12131A] leading-[1.02]">
-                LE VIN SANS SNOBISME, <br />
-                <span className="italic font-normal text-[#4747F4]">DES ÉMOTIONS AVEC DU STYLE.</span>
-              </h1>
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 pb-16 pt-12 sm:px-8 sm:pb-24 sm:pt-16">
+          <p className="t-label" style={{ color: 'var(--quiet)' }}>
+            Sommellerie · Radio · Formation · Conférences — Lyon
+          </p>
 
-              {/* Handwritten Script Personal Quote */}
-              <p className="font-script text-2xl sm:text-3xl text-[#FF4F14] font-bold leading-snug">
-                &quot;Le vin est bien plus qu&apos;une boisson. Il est un souvenir, une rencontre, une émotion.&quot;
-              </p>
+          <div className="mt-8 grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-10">
+            <div className="lg:col-span-7">
+              <LayeredTitle
+                as="h1"
+                lines={["L'hospitalité", "n'est pas", 'un métier']}
+                script="c'est une manière de vivre"
+                size="xl"
+                scriptX="2%"
+                scriptScale={0.42}
+                scriptRotate={-4}
+                scriptAvailable="min(calc(100vw - 3rem), 56rem)"
+              />
 
-              {/* Warm Personal Story Intro */}
-              <div className="bg-white/90 backdrop-blur-md p-7 rounded-3xl border border-gray-200/80 shadow-[0_15px_40px_rgba(71,71,244,0.06)] space-y-3 text-gray-700 text-base leading-relaxed">
-                <p className="font-bodoni text-lg text-[#12131A] font-semibold">
-                  Bienvenue dans mon univers !
-                </p>
-                <p>
-                  J&apos;ai à peu près six ans lorsque je sers ma première tasse de café dans le restaurant de mes grands-parents. Trente ans plus tard, ma passion pour le vin et l&apos;hospitalité est restée intacte : vivante, libre et joyeuse.
+              <div className="measure-wide mt-8">
+                <p className="t-lead">{OPENING[0]}</p>
+                <p className="t-lead mt-4" style={{ color: 'var(--quiet)' }}>
+                  Trente ans plus tard, je n&apos;ai jamais quitté la table.
                 </p>
               </div>
 
-              {/* Primary Single Call to Action */}
-              <div className="pt-2 flex flex-wrap items-center gap-4">
+              <div className="mt-10 flex flex-wrap gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-3 bg-[#FF4F14] text-white font-anton text-xs tracking-widest px-8 py-4 rounded-full hover:bg-[#4747F4] transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="btn border-lemon bg-lemon text-ink hover:bg-flame hover:border-flame hover:text-paper"
                 >
-                  ME CONTACTER / PROPOSER UN PROJET
-                  <ArrowRight className="w-4 h-4" />
+                  Proposer un projet
+                </Link>
+                <Link href="#histoire" className="btn btn--ghost">
+                  Lire mon histoire
                 </Link>
               </div>
-
             </div>
 
-            {/* Right Photo Frame: Mix of Authentic & Professional */}
             <div className="lg:col-span-5">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                
-                <div className="bg-white p-4 rounded-3xl border border-gray-200/70 shadow-[0_25px_60px_rgba(71,71,244,0.14)] relative">
-                  
-                  {/* Funky Corner Sticker */}
-                  <div className="absolute -top-3 -right-3 bg-[#FCFF97] text-[#12131A] font-anton text-[11px] px-3.5 py-1.5 rounded-full border border-gray-300 shadow-md rotate-3 z-10">
-                    ✨ LYON & EN DÉPLACEMENT
-                  </div>
-
-                  <div className="relative h-[460px] sm:h-[520px] w-full rounded-2xl overflow-hidden bg-gray-100">
-                    <Image
-                      src="/photos/sabrina_photo_01.jpg"
-                      alt="Sabrina Carlier Sommelier"
-                      fill
-                      priority
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between px-3 py-1">
-                    <div>
-                      <span className="font-bodoni font-bold text-xl text-[#12131A] block">SABRINA CARLIER</span>
-                      <span className="font-script text-[#FF4F14] text-base font-bold">Sommelier d&apos;Émotions & Consultante</span>
-                    </div>
-                    <span className="badge-pill badge-pill-lavender text-[10px]">
-                      30 ANS D&apos;EXPÉRIENCE
-                    </span>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-          {/* CLEAR SERVICES QUICK-HUB (Solves "I don't get what she does") */}
-          <div className="mt-16 bg-white p-8 sm:p-10 rounded-3xl border border-gray-200/80 shadow-[0_20px_50px_rgba(18,19,26,0.05)]">
-            <div className="text-center max-w-xl mx-auto mb-8 space-y-2">
-              <span className="badge-pill badge-pill-teal">
-                CE QUE JE FAIS
-              </span>
-              <h2 className="font-bodoni text-2xl sm:text-3xl font-bold text-[#12131A]">
-                4 FAÇONS DE COLLABORER ENSEMBLE
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              
-              <Link href="/chroniques-radio" className="group p-5 rounded-2xl bg-[#FAF8F5] hover:bg-[#4747F4] hover:text-white transition-all border border-gray-100 space-y-3">
-                <div className="w-10 h-10 bg-[#4747F4] group-hover:bg-white text-white group-hover:text-[#4747F4] rounded-xl flex items-center justify-center font-bold">
-                  🎙️
-                </div>
-                <span className="text-[11px] font-anton tracking-widest text-[#4747F4] group-hover:text-[#FCFF97] uppercase block">01 / STATIONS RADIO</span>
-                <h3 className="font-bodoni font-bold text-xl">CHRONIQUES RADIO</h3>
-                <p className="text-xs text-gray-600 group-hover:text-blue-100 leading-relaxed">
-                  &quot;Les 400 Coups&quot; sur France Bleu. Chroniques sur-mesure & histoires vignerons.
-                </p>
-              </Link>
-
-              <Link href="/ateliers-degustation" className="group p-5 rounded-2xl bg-[#FAF8F5] hover:bg-[#FF4F14] hover:text-white transition-all border border-gray-100 space-y-3">
-                <div className="w-10 h-10 bg-[#FF4F14] group-hover:bg-white text-white group-hover:text-[#FF4F14] rounded-xl flex items-center justify-center font-bold">
-                  🍷
-                </div>
-                <span className="text-[11px] font-anton tracking-widest text-[#FF4F14] group-hover:text-[#FCFF97] uppercase block">02 / ENTREPRISES B2B</span>
-                <h3 className="font-bodoni font-bold text-xl">ATELIERS DÉGUSTATION</h3>
-                <p className="text-xs text-gray-600 group-hover:text-orange-100 leading-relaxed">
-                  &quot;Bienvenue à ma table&quot;. Événements B2B insolites (Val d&apos;Isère, lofts, potagers).
-                </p>
-              </Link>
-
-              <Link href="/formations-ecoles" className="group p-5 rounded-2xl bg-[#FAF8F5] hover:bg-[#0AAE98] hover:text-white transition-all border border-gray-100 space-y-3">
-                <div className="w-10 h-10 bg-[#0AAE98] group-hover:bg-white text-white group-hover:text-[#0AAE98] rounded-xl flex items-center justify-center font-bold">
-                  🎓
-                </div>
-                <span className="text-[11px] font-anton tracking-widest text-[#0AAE98] group-hover:text-[#FCFF97] uppercase block">03 / ÉCOLES SUPÉRIEURES</span>
-                <h3 className="font-bodoni font-bold text-xl">ÉCOLE & FORMATION</h3>
-                <p className="text-xs text-gray-600 group-hover:text-teal-100 leading-relaxed">
-                  Intervenante ISG Luxury Management Lyon & Genève (Hospitalité, Wine & Mgmt).
-                </p>
-              </Link>
-
-              <Link href="/conferences" className="group p-5 rounded-2xl bg-[#FAF8F5] hover:bg-[#E6CEFC] hover:text-[#12131A] transition-all border border-gray-100 space-y-3">
-                <div className="w-10 h-10 bg-[#E6CEFC] text-[#12131A] rounded-xl flex items-center justify-center font-bold">
-                  🎭
-                </div>
-                <span className="text-[11px] font-anton tracking-widest text-[#FF4F14] uppercase block">04 / SCÈNE & THÉÂTRE</span>
-                <h3 className="font-bodoni font-bold text-xl text-[#12131A]">CONFÉRENCE</h3>
-                <p className="text-xs text-gray-600 group-hover:text-[#12131A] leading-relaxed">
-                  &quot;Le vin, vecteur d&apos;émotion&quot;. Prise de parole participative avec dégustation.
-                </p>
-              </Link>
-
+              <PhotoPlate
+                src="/photos/sabrina_photo_06.jpg"
+                alt="Sabrina Carlier, un verre de vin à la main, dans un bar à vin"
+                ratio="aspect-square"
+                priority
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+              <p className="t-ui mt-4 text-xs" style={{ color: 'var(--quiet)' }}>
+                Pas de costume, pas de cravate. Trente ans de salle, quand même.
+              </p>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* DETAILED NARRATIVE STORY ("Raconte mon histoire") */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-14 rounded-3xl border border-gray-200/80 shadow-[0_20px_50px_rgba(18,19,26,0.04)] space-y-12">
-          
-          <div className="space-y-3">
-            <span className="badge-pill badge-pill-lavender">
-              <Heart className="w-3.5 h-3.5 text-[#FF4F14]" /> PARCOURS & RÉCIT SINCÈRE
-            </span>
-            <h2 className="font-bodoni text-3xl sm:text-5xl font-bold text-[#12131A] tracking-tight">
-              30 ANS D&apos;HOSPITALITÉ : MON HISTOIRE
-            </h2>
-            <p className="text-gray-600 text-sm max-w-2xl">
-              De mes 6 ans dans le restaurant familial aux grands établissements et aux cours en école supérieure.
+      {/* ── TICKER ───────────────────────────────────────────────────────── */}
+      <div data-cw="lemon" className="border-y-2 border-ink py-4">
+        <Marquee items={TICKER} duration={52} />
+      </div>
+
+      {/* ── WHAT SHE DOES ────────────────────────────────────────────────── */}
+      <section data-cw="paper" className="relative">
+        <div className="mx-auto max-w-[100rem] px-5 pb-14 pt-16 sm:px-8 sm:pb-20 sm:pt-24">
+          <LayeredTitle
+            lines={['Quatre façons', 'de travailler', 'ensemble']}
+            script="et une seule obsession"
+            size="lg"
+            scriptX="6%"
+            scriptScale={0.38}
+            scriptAvailable="min(calc(100vw - 3rem), 44rem)"
+          />
+          <p className="t-lead measure mt-10">
+            Une table, un micro, une salle de classe ou une scène. Le support
+            change, le métier non : réunir des gens et leur raconter quelque
+            chose qu&apos;ils garderont.
+          </p>
+        </div>
+      </section>
+
+      {CHAPTERS.map((chapter, i) => (
+        <Chapter key={chapter.number} chapter={chapter} flip={i % 2 === 1} />
+      ))}
+
+      {/* ── THE STORY ────────────────────────────────────────────────────── */}
+      <section id="histoire" data-cw="paper" className="relative scroll-mt-20">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <p className="t-label" style={{ color: 'var(--quiet)' }}>
+              Le parcours
             </p>
-          </div>
+            <LayeredTitle
+              lines={['Trente ans', 'de tables']}
+              script="et de rencontres"
+              size="lg"
+              scriptX="10%"
+              scriptScale={0.42}
+              scriptAvailable="min(calc(100vw - 3rem), 40rem)"
+              className="mt-4"
+            />
+          </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* Story Timeline Column */}
-            <div className="lg:col-span-8 space-y-6 text-gray-800 text-base leading-relaxed">
-              
-              <div className="bg-[#FAF8F5] p-6 rounded-2xl border border-gray-200/70 space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-[#FCFF97] text-[#12131A] rounded-full flex items-center justify-center font-bold text-sm">
-                    <Coffee className="w-4 h-4 text-[#FF4F14]" />
-                  </div>
-                  <h3 className="font-bodoni font-bold text-xl text-[#12131A]">L&apos;ENFANCE DANS LE RESTAURANT DE MES GRANDS-PARENTS</h3>
-                </div>
-                <p className="text-sm text-gray-700">
-                  J&apos;ai à peu près six ans lorsque je sers ma première tasse de café dans le bar-restaurant de mes grands-parents. Entre les tables de multiplication et les dictées, j&apos;apprends aussi à reconnaître le bruit d&apos;un percolateur, j&apos;entends le chef parler de beurre clarifié pour sa sauce hollandaise et je regarde mon grand-père rentrer de ses parcs à huîtres pour garnir les buffets de fruits de mer.
-                </p>
-                <p className="font-script text-xl text-[#FF4F14] font-bold">
-                  Très tôt, je comprends que l&apos;hospitalité n&apos;est pas un métier. C&apos;est une manière de vivre.
-                </p>
-              </div>
+          <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <Reveal className="prose-editorial measure">
+                {OPENING.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </Reveal>
 
-              <div className="bg-[#FAF8F5] p-6 rounded-2xl border border-gray-200/70 space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-[#4747F4] text-white rounded-full flex items-center justify-center font-bold text-sm">
-                    🍷
-                  </div>
-                  <h3 className="font-bodoni font-bold text-xl text-[#12131A]">PILOTE DE CHASSE ? ET LE PREMIER AMOUR</h3>
-                </div>
-                <p className="text-sm text-gray-700">
-                  Bien sûr, il y a bien eu cette courte période où je voulais devenir pilote de chasse. Mais j&apos;en veux surtout à Tom Cruise et à son Mirage… La restauration, elle, ne m&apos;a jamais quittée. Le vin est arrivé un peu plus tard. Il a bouleversé mon cœur. Il est devenu mon premier grand amour… enfin, presque. (Pardon Sébastien.)
-                </p>
-              </div>
+              <Reveal>
+                <blockquote className="my-14 border-l-4 border-flame pl-6 sm:pl-8">
+                  <p className="t-script text-[clamp(1.75rem,4.5vw,3rem)] text-flame">
+                    Très tôt, je comprends que l&apos;hospitalité n&apos;est pas un
+                    métier. C&apos;est une manière de vivre.
+                  </p>
+                </blockquote>
+              </Reveal>
 
-              <div className="bg-[#FAF8F5] p-6 rounded-2xl border border-gray-200/70 space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-[#0AAE98] text-white rounded-full flex items-center justify-center font-bold text-sm">
-                    ✨
-                  </div>
-                  <h3 className="font-bodoni font-bold text-xl text-[#12131A]">30 ANS DE TERRAIN, DE PLONGE À LA DIRECTION</h3>
-                </div>
-                <p className="text-sm text-gray-700">
-                  En trente ans, j&apos;ai fait de la plonge, des chambres, de la réception, du service, de la sommellerie, de la direction. J&apos;ai organisé des mariages, des repas intimistes, des événements de mille personnes. J&apos;ai vendu des bouteilles à dix euros et d&apos;autres à douze mille. J&apos;ai connu les coups de feu, les coups de gueule, les coups de foudre aussi.
-                </p>
-              </div>
-
-              <div className="bg-[#4747F4] text-white p-7 rounded-2xl shadow-md space-y-3">
-                <h3 className="font-bodoni font-bold text-2xl text-[#FCFF97]">AUJOURD&apos;HUI : ACCUEILLIR AUTREMENT</h3>
-                <p className="text-sm leading-relaxed text-blue-100">
-                  Aujourd&apos;hui, je ressens simplement l&apos;envie d&apos;aller plus loin. Continuer à accueillir, mais autrement. Transmettre ce que le terrain m&apos;a appris. Créer des expériences autour du vin, enseigner, donner des conférences et accompagner des établissements. Et surtout remettre ce qui m&apos;a toujours guidée au cœur de mon métier : les rencontres, le partage et les émotions.
-                </p>
-              </div>
-
+              <Reveal className="prose-editorial measure">
+                {AFTER_FIRST_QUOTE.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </Reveal>
             </div>
 
-            {/* Right Accent Image Grid */}
-            <div className="lg:col-span-4 space-y-6">
-              
-              <div className="bg-[#FAF8F5] p-4 rounded-3xl border border-gray-200 shadow-sm">
-                <div className="relative h-64 w-full rounded-2xl overflow-hidden">
-                  <Image
-                    src="/photos/sabrina_photo_03.jpg"
-                    alt="Sabrina Carlier en cuisine et service"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <p className="text-xs text-center text-gray-600 mt-3 font-medium">
-                  Moments spontanés sur le terrain avec les équipes.
+            <div className="lg:col-span-5">
+              <Reveal className="lg:sticky lg:top-28">
+                <PhotoPlate
+                  src="/photos/sabrina_photo_14.jpg"
+                  alt="Sabrina Carlier en tablier dans un restaurant de montagne"
+                  offset="var(--color-lilac)"
+                  ratio="aspect-[3/4]"
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                />
+                <p className="t-ui mt-6 text-xs" style={{ color: 'var(--quiet)' }}>
+                  De la plonge à la direction — en passant par les chambres, la
+                  réception, le service et la sommellerie.
                 </p>
-              </div>
+              </Reveal>
+            </div>
+          </div>
 
-              <div className="bg-[#FCFF97] p-6 rounded-3xl shadow-sm text-[#12131A] space-y-3">
-                <span className="font-anton text-xs tracking-widest text-[#FF4F14] uppercase block">EXPÉRIENCE EN CHIFFRES</span>
-                <ul className="space-y-2 text-sm font-semibold">
-                  <li className="flex items-center gap-2">
-                    <Flame className="w-4 h-4 text-[#FF4F14]" /> 30 Ans d&apos;Hospitalité
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Flame className="w-4 h-4 text-[#FF4F14]" /> 100+ Ateliers & Dîners Insolites
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Flame className="w-4 h-4 text-[#FF4F14]" /> France Bleu & ISG Mgmt
-                  </li>
+          {/* Full-width beat: the list of everything she has done */}
+          <Reveal className="mt-8">
+            <div className="prose-editorial measure-wide">
+              {THIRTY_YEARS.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── A RESTAURANT IS MORE ─────────────────────────────────────────── */}
+      <section data-cw="ink" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
+
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+            <Reveal className="lg:col-span-5">
+              <PhotoPlate
+                src="/photos/sabrina_photo_04.jpg"
+                alt="Longue tablée couverte de plats partagés, vue de dessus"
+                duo="mint"
+                ratio="aspect-[4/5]"
+                sizes="(max-width: 1024px) 100vw, 38vw"
+              />
+            </Reveal>
+
+            <div className="lg:col-span-7">
+              <Reveal className="prose-editorial measure">
+                {A_RESTAURANT_IS.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </Reveal>
+
+              <Reveal>
+                <p
+                  className="t-script mt-10 text-[clamp(2rem,6vw,4.25rem)] leading-[0.95]"
+                  style={{ color: 'var(--script)' }}
+                >
+                  Les émotions que l&apos;on partage autour d&apos;une table.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TODAY ────────────────────────────────────────────────────────── */}
+      <section data-cw="paper" className="relative">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <Reveal>
+                <p className="t-label" style={{ color: 'var(--quiet)' }}>
+                  Aujourd&apos;hui
+                </p>
+                <LayeredTitle
+                  lines={['Aller', 'plus loin']}
+                  script="autrement"
+                  size="lg"
+                  scriptX="12%"
+                  scriptScale={0.44}
+                  scriptAvailable="min(calc(100vw - 3rem), 30rem)"
+                  className="mt-4"
+                />
+              </Reveal>
+
+              <Reveal className="prose-editorial measure mt-12">
+                {TODAY_INTRO.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </Reveal>
+
+              <Reveal>
+                <ul className="mt-10 max-w-xl">
+                  {TODAY_LIST.map((item, i) => (
+                    <li
+                      key={i}
+                      className="flex items-baseline gap-4 border-t py-3.5"
+                      style={{ borderColor: 'var(--rule)' }}
+                    >
+                      <span className="t-label shrink-0" style={{ color: 'var(--accent)' }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="text-lg">{item}</span>
+                    </li>
+                  ))}
                 </ul>
-              </div>
+              </Reveal>
 
+              <Reveal>
+                <p className="t-lead measure mt-10">{CLOSING}</p>
+                <p className="t-script mt-8 text-[clamp(2rem,5vw,3.5rem)] text-electric">
+                  Bienvenue dans mon univers.
+                </p>
+              </Reveal>
             </div>
 
-          </div>
-
-        </div>
-      </section>
-
-      {/* PHOTO GALLERY */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PhotoGallery />
-      </section>
-
-      {/* BOTTOM CTA BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FF4F14] text-white p-10 sm:p-14 rounded-3xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
-          <div className="space-y-3 text-center lg:text-left">
-            <span className="badge-pill badge-pill-yellow">
-              DISPONIBILITÉS 2026 - 2027
-            </span>
-            <h2 className="font-bodoni text-3xl sm:text-4xl font-bold tracking-tight text-white">
-              SOUHAITEZ-VOUS ÉCHANGER SUR UN PROJET SUR-MESURE ?
-            </h2>
-            <p className="text-orange-100 text-sm max-w-xl">
-              Écrivez directement à <span className="font-bold text-[#FCFF97]">hello@sabrinacarlier.fr</span> pour échanger avec Sabrina.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-4">
-            <Link
-              href="/contact"
-              className="bg-[#4747F4] text-white font-anton text-xs tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-[#12131A] transition-colors shadow-lg"
-            >
-              ME CONTACTER
-            </Link>
-            <Link
-              href="/cv"
-              className="bg-white text-[#12131A] font-anton text-xs tracking-widest px-6 py-4 rounded-full hover:bg-[#FCFF97] transition-colors shadow-md flex items-center gap-2"
-            >
-              <FileText className="w-4 h-4 text-[#4747F4]" /> VOIR LE CV
-            </Link>
+            <Reveal className="lg:col-span-5">
+              <div className="lg:sticky lg:top-28">
+                <PhotoPlate
+                  src="/photos/sabrina_photo_35.jpg"
+                  alt="Sabrina Carlier et son équipe, éclats de rire en fin de service"
+                  offset="var(--color-lemon)"
+                  ratio="aspect-[3/4]"
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                />
+                <p className="t-ui mt-6 text-xs" style={{ color: 'var(--quiet)' }}>
+                  Et surtout, j&apos;ai rencontré des femmes et des hommes
+                  extraordinaires.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-    </div>
+      {/* ── GALLERY ──────────────────────────────────────────────────────── */}
+      <PhotoGallery />
+
+      {/* ── CTA ──────────────────────────────────────────────────────────── */}
+      <section data-cw="flame" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
+
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <LayeredTitle
+              lines={['Une table,', 'une scène,', 'une promo ?']}
+              script="racontez-moi"
+              size="lg"
+              scriptX="8%"
+              scriptScale={0.42}
+              scriptAvailable="min(calc(100vw - 3rem), 34rem)"
+              className="lg:col-span-7"
+            />
+
+            <div className="lg:col-span-5">
+              <p className="t-lead">
+                Entreprises, écoles, radios, théâtres, domaines, festivals — si
+                vous avez un projet, une date ou simplement une envie,
+                écrivez-moi. J&apos;étudie chaque proposition avec attention.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-5">
+                <Link href="/contact" className="btn btn--solid">
+                  Me contacter
+                </Link>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="t-label underline underline-offset-4"
+                >
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

@@ -1,123 +1,94 @@
 import Link from 'next/link';
-import { Mail, Radio, MapPin, ArrowUpRight, Heart } from 'lucide-react';
+import { NAV_LINKS, CONTACT_EMAIL, PODCAST_URL } from '@/lib/nav';
+import LayeredTitle from './LayeredTitle';
+import Wordmark from './Wordmark';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#161720] text-white pt-20 pb-12 relative overflow-hidden">
-      {/* Top Accent Gradient Line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#4747F4] via-[#FCFF97] via-[#FF4F14] via-[#0AAE98] to-[#E6CEFC]" />
+    <footer data-cw="ink" className="relative">
+      <span aria-hidden="true" className="grain-layer" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
-          {/* Brand Column */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#FCFF97] text-[#161720] font-anton text-xl flex items-center justify-center rounded-xl font-bold">
-                SC
-              </div>
-              <div>
-                <span className="font-bodoni text-2xl font-bold tracking-tight text-white block leading-none">
-                  SABRINA CARLIER
-                </span>
-                <span className="font-script text-[#FCFF97] text-base">
-                  Sommelerie & Émotions
-                </span>
-              </div>
-            </div>
+      <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-24">
+        <LayeredTitle
+          as="p"
+          lines={['On se dit', 'quoi ?']}
+          script="autour d'un verre"
+          size="lg"
+          scriptX="18%"
+          scriptRotate={-5}
+          className="mb-14"
+        />
 
-            <p className="text-gray-400 text-sm leading-relaxed">
-              30 ans de terrain, de sommellerie et d&apos;hospitalité. Transmettre le vin avec liberté, curiosité et sincérité.
+        <div className="grid gap-12 border-t pt-12 md:grid-cols-12" style={{ borderColor: 'var(--rule)' }}>
+          <div className="md:col-span-5">
+            <Wordmark size="text-2xl" />
+            <p className="t-lead measure mt-6" style={{ color: 'var(--quiet)' }}>
+              Trente ans d&apos;hospitalité, de sommellerie et de terrain. Continuer
+              à accueillir, mais autrement — par les rencontres, le partage et les
+              émotions.
             </p>
-
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/5 border border-white/10 text-gray-300 rounded-full text-xs">
-              <MapPin className="w-3.5 h-3.5 text-[#0AAE98]" />
-              Basée à Lyon, France & Mobile
-            </div>
+            <p className="t-label mt-6" style={{ color: 'var(--quiet)' }}>
+              Lyon · Genève · et partout où il y a une table
+            </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-anton text-sm tracking-widest text-[#FCFF97] mb-5 uppercase">
-              Navigation
-            </h3>
-            <ul className="space-y-3 text-sm text-gray-300">
+          <nav aria-label="Pied de page" className="md:col-span-3">
+            <h2 className="t-label mb-5" style={{ color: 'var(--display)' }}>
+              Le site
+            </h2>
+            <ul className="space-y-2.5">
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="hover:underline">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Accueil & Story
-                </Link>
-              </li>
-              <li>
-                <Link href="/chroniques-radio" className="hover:text-white transition-colors">
-                  Chroniques Radio (Les 400 Coups)
-                </Link>
-              </li>
-              <li>
-                <Link href="/ateliers-degustation" className="hover:text-white transition-colors">
-                  Ateliers Dégustation B2B
-                </Link>
-              </li>
-              <li>
-                <Link href="/formations-ecoles" className="hover:text-white transition-colors">
-                  Écoles & Formations
-                </Link>
-              </li>
-              <li>
-                <Link href="/conferences" className="hover:text-white transition-colors">
-                  Conférence (&quot;Le vin, vecteur d&apos;émotion&quot;)
-                </Link>
-              </li>
-              <li>
-                <Link href="/cv" className="hover:text-white transition-colors">
-                  Parcours & CV Web
+                <Link href="/contact" className="hover:underline">
+                  Contact
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
-          {/* Media & France Bleu */}
-          <div>
-            <h3 className="font-anton text-sm tracking-widest text-[#E6CEFC] mb-5 uppercase">
-              Médias & Podcast
-            </h3>
-            <p className="text-xs text-gray-400 mb-4 leading-relaxed">
-              Retrouvez la chronique radio &quot;Les 400 Coups&quot; diffusée sur France Bleu.
-            </p>
+          <div className="md:col-span-4">
+            <h2 className="t-label mb-5" style={{ color: 'var(--display)' }}>
+              Écouter & écrire
+            </h2>
+
             <a
-              href="https://www.radiofrance.fr/francebleu/podcasts/les-400-coups-4969189"
+              href={PODCAST_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#4747F4] text-white text-xs font-medium px-4 py-2.5 rounded-full hover:bg-[#FF4F14] transition-colors"
+              className="block hover:underline"
             >
-              Écouter sur France Bleu
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              « Les 400 Coups » sur France Bleu
+              <span className="t-label ml-2 align-middle" style={{ color: 'var(--quiet)' }}>
+                ↗
+              </span>
             </a>
-          </div>
 
-          {/* Direct Contact */}
-          <div>
-            <h3 className="font-anton text-sm tracking-widest text-[#FF4F14] mb-5 uppercase">
-              Contact Direct
-            </h3>
-            <p className="text-xs text-gray-400 mb-4">
-              Pour toute intervention en entreprise, école ou média :
-            </p>
             <a
-              href="mailto:hello@sabrinacarlier.fr"
-              className="inline-block bg-[#FCFF97] text-[#161720] font-anton text-sm tracking-wider px-5 py-2.5 rounded-full hover:bg-white transition-colors"
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="mt-6 block text-lg hover:underline"
+              style={{ color: 'var(--script)' }}
             >
-              hello@sabrinacarlier.fr
+              {CONTACT_EMAIL}
             </a>
-          </div>
 
+            <Link href="/contact" className="btn btn--ghost mt-8">
+              Proposer un projet
+            </Link>
+          </div>
         </div>
 
-        {/* Bottom Credits */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} Sabrina Carlier. Tous droits réservés.</p>
-          <p className="flex items-center gap-1">
-            Créé pour une sommellerie libre, humaine & élégante.
-          </p>
+        <div
+          className="t-ui mt-14 flex flex-col gap-2 border-t pt-6 text-xs sm:flex-row sm:justify-between"
+          style={{ borderColor: 'var(--rule)', color: 'var(--quiet)' }}
+        >
+          <p>© {new Date().getFullYear()} Sabrina Carlier</p>
+          <p>Le vin est bien plus qu&apos;une boisson. Il est un souvenir.</p>
         </div>
       </div>
     </footer>

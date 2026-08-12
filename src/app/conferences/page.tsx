@@ -1,112 +1,208 @@
-import Link from 'next/link';
-import { Mic, Sparkles, Wine, Brain, Calendar } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import PhotoPlate from '@/components/PhotoPlate';
+import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
-  title: 'Conférence - Le Vin, Vecteur d\'Émotion | Sabrina Carlier',
-  description: 'Une conférence-expérience unique par Sabrina Carlier. Redécouvrir le vin à travers la mémoire, les sens et l\'émotion. Représentations entreprises (Automne 2026) & public (Janvier 2027).',
+  title: 'Le vin, vecteur d’émotion — conférence',
+  description:
+    "Une conférence-expérience en création par Sabrina Carlier, mêlant récit, dégustation et échanges avec le public. Première en entreprise à l'automne 2026, programmation publique à partir de janvier 2027.",
 };
+
+/** Verbatim from "Page 6 — Conférence". */
+const QUESTIONS = [
+  'Pourquoi certains vins nous bouleversent-ils alors que nous sommes incapables de nous souvenir de leur cépage ?',
+  'Pourquoi une simple odeur peut-elle nous ramener vingt ans en arrière ?',
+  'Pourquoi gardons-nous en mémoire un repas, une personne ou un instant bien plus qu’une note de dégustation ?',
+];
+
+const IS_MORE = ['Un souvenir.', 'Une rencontre.', 'Une émotion.', 'Une histoire.'];
+
+const APPROACH = [
+  "À travers cette conférence, j'ai envie de proposer une autre façon de parler du vin.",
+  'Pas avec des fiches techniques ou des notes sur vingt. Mais avec des souvenirs, des récits, des expériences sensorielles et des échanges avec le public.',
+  "Parce qu'au fond, ce ne sont pas les grands vins que nous retenons. Ce sont les émotions qu'ils nous ont permis de vivre.",
+];
+
+const INGREDIENTS = [
+  'Une dégustation',
+  'Des invités : vignerons, chefs, artisans, scientifiques, écrivains…',
+  'Des interactions avec le public',
+  'Quelques éclairages sur la mémoire, les sens et les émotions',
+  'Et surtout… beaucoup d’histoires',
+];
+
+const DATES = [
+  {
+    when: 'Automne 2026',
+    what: 'Première représentation en entreprise',
+    detail: 'Séminaires, conventions et événements privés.',
+  },
+  {
+    when: 'Janvier 2027',
+    what: 'Programmation ouverte au public',
+    detail: 'Cafés-théâtres, lieux culturels, caves et festivals.',
+  },
+];
 
 export default function ConferencesPage() {
   return (
-    <div className="space-y-20 py-12 pb-24">
-      
-      {/* HERO BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#E6CEFC] text-[#161720] p-10 sm:p-14 rounded-3xl shadow-xl relative overflow-hidden">
-          <div className="max-w-3xl space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="badge-pill badge-pill-orange">
-                <Mic className="w-3.5 h-3.5" /> CONFÉRENCE-EXPÉRIENCE
-              </span>
-              <span className="badge-pill bg-white text-[#161720]">
-                ✨ PROJET EN CRÉATION
-              </span>
+    <>
+      <PageHero
+        colorway="lilac"
+        kicker="Conférence-expérience · projet en création"
+        lines={['Le vin,', 'vecteur', 'd’émotion']}
+        script="une autre façon d'en parler"
+        scriptX="4%"
+        scriptScale={0.34}
+        scriptAvailable="min(calc(100vw - 3rem), 40rem)"
+        lead="Le vin est bien plus qu'une boisson. Une conférence vivante mêlant récit, dégustation, échanges et rencontres — dont chaque représentation sera différente."
+        photo={{
+          src: '/photos/sabrina_photo_58.jpg',
+          alt: 'Sabrina Carlier prenant la parole devant un public assis',
+        }}
+      />
+
+      {/* ── QUESTIONS ────────────────────────────────────────────────────── */}
+      <section data-cw="ink" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
+
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <ol className="grid gap-10 md:grid-cols-3">
+            {QUESTIONS.map((q, i) => (
+              <Reveal key={q} delay={i * 80}>
+                <li
+                  className="border-t-2 pt-6"
+                  style={{ borderColor: 'var(--display)' }}
+                >
+                  <span className="t-label" style={{ color: 'var(--display)' }}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="t-lead mt-4">{q}</p>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+
+          <Reveal className="mt-20 grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <p className="t-lead" style={{ color: 'var(--quiet)' }}>
+                Le vin est bien plus qu&apos;une boisson.
+              </p>
+              {IS_MORE.map((line) => (
+                <p
+                  key={line}
+                  className="t-display text-[length:var(--text-display-sm)] leading-tight"
+                  style={{ color: 'var(--display)' }}
+                >
+                  {line}
+                </p>
+              ))}
             </div>
-            <h1 className="font-bodoni text-4xl sm:text-6xl font-bold tracking-tight text-[#161720] leading-none">
-              LE VIN, VECTEUR D&apos;ÉMOTION
-            </h1>
-            <p className="font-script text-2xl text-[#4747F4] font-semibold">
-              &quot;Au fond, ce ne sont pas les grands vins que nous retenons. Ce sont les émotions qu&apos;ils nous ont permis de vivre.&quot;
-            </p>
-            <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
-              Une conférence vivante mêlant récit, dégustation, éclairages neuro-sensoriels et échanges avec le public.
-            </p>
+
+            <div className="lg:col-span-7">
+              <div className="prose-editorial measure">
+                {APPROACH.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── THE SHAPE ────────────────────────────────────────────────────── */}
+      <section data-cw="paper" className="relative">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <Reveal>
+                <p className="t-label" style={{ color: 'var(--quiet)' }}>
+                  Une conférence qui se construit avec le public
+                </p>
+                <h2 className="t-display mt-4 text-[length:var(--text-display-md)]">
+                  Selon les formats
+                </h2>
+                <p className="t-lead measure mt-6">
+                  Le projet est actuellement en création. J&apos;imagine une
+                  expérience vivante, où la conférence pourra intégrer :
+                </p>
+
+                <ul className="mt-8 max-w-2xl">
+                  {INGREDIENTS.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-baseline gap-3 border-t py-3.5"
+                      style={{ borderColor: 'var(--rule)' }}
+                    >
+                      <span aria-hidden="true" className="shrink-0" style={{ color: 'var(--accent)' }}>
+                        —
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="t-script mt-10 text-[clamp(1.5rem,3.5vw,2.5rem)] text-flame">
+                  Chaque représentation pourra être différente.
+                </p>
+              </Reveal>
+            </div>
+
+            <div className="lg:col-span-5">
+              <Reveal className="lg:sticky lg:top-28">
+                <PhotoPlate
+                  src="/photos/sabrina_photo_57.jpg"
+                  alt="Caméra sur pied installée avant une captation"
+                  offset="var(--color-lilac)"
+                  ratio="aspect-[3/4]"
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                />
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CORE QUESTIONS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-12 rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(22,23,32,0.04)] space-y-10">
-          
-          <h2 className="font-bodoni text-3xl sm:text-4xl font-bold text-[#161720] tracking-tight">
-            POURQUOI CERTAINS VINS NOUS BOULEVERSENT-ILS ?
+      {/* ── DATES ────────────────────────────────────────────────────────── */}
+      <section data-cw="lilac" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
+
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-24">
+          <h2 className="t-display text-[length:var(--text-display-md)]" style={{ color: 'var(--display)' }}>
+            Premières représentations
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-[#FAF9F6] p-7 rounded-2xl border border-gray-100 space-y-3">
-              <Brain className="w-7 h-7 text-[#FF4F14]" />
-              <p className="text-sm font-semibold text-[#161720] leading-snug">
-                &quot;Pourquoi certains vins nous bouleversent-ils alors que nous sommes incapables de nous souvenir de leur cépage ?&quot;
-              </p>
-            </div>
-            <div className="bg-[#FAF9F6] p-7 rounded-2xl border border-gray-100 space-y-3">
-              <Sparkles className="w-7 h-7 text-[#4747F4]" />
-              <p className="text-sm font-semibold text-[#161720] leading-snug">
-                &quot;Pourquoi une simple odeur peut-elle nous ramener vingt ans en arrière ?&quot;
-              </p>
-            </div>
-            <div className="bg-[#FAF9F6] p-7 rounded-2xl border border-gray-100 space-y-3">
-              <Wine className="w-7 h-7 text-[#0AAE98]" />
-              <p className="text-sm font-semibold text-[#161720] leading-snug">
-                &quot;Pourquoi gardons-nous en mémoire un repas ou un instant bien plus qu&apos;une note de dégustation ?&quot;
-              </p>
-            </div>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
+            {DATES.map((d) => (
+              <div
+                key={d.when}
+                className="border-t-2 pt-6"
+                style={{ borderColor: 'var(--display)' }}
+              >
+                <p className="t-label" style={{ color: 'var(--accent)' }}>
+                  {d.when}
+                </p>
+                <h3 className="t-display mt-3 text-[length:var(--text-display-sm)]">
+                  {d.what}
+                </h3>
+                <p className="mt-3" style={{ color: 'var(--quiet)' }}>
+                  {d.detail}
+                </p>
+              </div>
+            ))}
           </div>
 
-          <div className="bg-[#FCFF97] p-8 rounded-2xl space-y-3">
-            <h3 className="font-bodoni font-bold text-2xl text-[#161720]">UNE AUTRE FAÇON DE PARLER DU VIN</h3>
-            <p className="text-sm text-gray-800 leading-relaxed">
-              Pas avec des fiches techniques ou des notes sur vingt. Mais avec des souvenirs, des récits, des expériences sensorielles et des échanges avec le public. Parce qu&apos;au fond, ce ne sont pas les grands vins que nous retenons, mais les émotions qu&apos;ils nous ont permis de vivre.
-            </p>
-          </div>
-
+          <p className="t-lead measure-wide mt-14">
+            Vous êtes une entreprise, un théâtre, un domaine viticole, une école
+            ou un organisateur d&apos;événements, et vous souhaitez être parmi
+            les premiers à accueillir <em>Le vin, vecteur d&apos;émotion</em> ?
+            Je serais heureuse d&apos;échanger avec vous.
+          </p>
         </div>
       </section>
 
-      {/* DATES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-12 rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(22,23,32,0.04)] space-y-8">
-          <h2 className="font-bodoni text-3xl font-bold text-[#161720] flex items-center gap-3">
-            <Calendar className="w-6 h-6 text-[#FF4F14]" /> PREMIÈRES REPRESENTATIONS
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[#FAF9F6] p-7 rounded-2xl border border-gray-100 space-y-3">
-              <span className="badge-pill badge-pill-orange">AUTOMNE 2026</span>
-              <h3 className="font-bodoni font-bold text-2xl text-[#161720]">REPRÉSENTATION EN ENTREPRISE</h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Format exclusif pour séminaires d&apos;entreprise, conventions et événements privés.
-              </p>
-            </div>
-
-            <div className="bg-[#FAF9F6] p-7 rounded-2xl border border-gray-100 space-y-3">
-              <span className="badge-pill badge-pill-teal">JANVIER 2027</span>
-              <h3 className="font-bodoni font-bold text-2xl text-[#161720]">PROGRAMMATION PUBLIQUE</h3>
-              <p className="text-xs text-gray-600 leading-relaxed">
-                Cafés-théâtres (Croix-Rousse Lyon), lieux culturels, caves et festivals viticoles.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FORM */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ContactForm defaultSubject="Conférence & Intervention" />
-      </section>
-
-    </div>
+      <ContactForm defaultSubject="Conférence « Le vin, vecteur d’émotion »" />
+    </>
   );
 }

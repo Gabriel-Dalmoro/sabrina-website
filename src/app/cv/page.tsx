@@ -1,188 +1,153 @@
 import Link from 'next/link';
-import { FileText, Briefcase, Star, Sparkles, CheckCircle2, Lock } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import Reveal from '@/components/Reveal';
+import { ROLES, EDUCATION, SKILLS } from '@/content/parcours';
 
 export const metadata = {
-  title: 'Parcours & CV Web - Sabrina Carlier',
-  description: 'Profil professionnel et parcours de Sabrina Carlier. 30 ans d\'expérience en direction d\'exploitation, sommellerie, enseignement et événements.',
+  title: 'Parcours',
+  description:
+    "Le parcours professionnel de Sabrina Carlier : direction d'exploitation, sommellerie, hôtellerie et restauration — de Theillard Genève à Wine You Want, en passant par la Maison Marc Veyrat et Christian Têtedoie.",
 };
 
-const careerMilestones = [
-  {
-    period: '2023 - PRÉSENT',
-    role: 'Fondatrice & Sommelier d\'Émotion',
-    company: 'Sabrina Carlier Freelance',
-    badge: 'Actuel',
-    pillColor: 'badge-pill-orange',
-    highlights: [
-      'Création et animation des chroniques radio "Les 400 Coups" sur France Bleu.',
-      'Conception et animation d\'ateliers dégustation sur-mesure B2B (entreprises, chefs, évènements).',
-      'Création de la conférence-expérience "Le vin, vecteur d\'émotion" (Automne 2026 / Jan 2027).',
-      'Interventions en écoles supérieures (ISG Luxury Management Lyon & Genève).',
-    ],
-  },
-  {
-    period: 'ENSEIGNEMENT',
-    role: 'Intervenante Hospitality & Wine Business',
-    company: 'ISG Luxury Management – Lyon & Genève',
-    badge: 'Académique',
-    pillColor: 'badge-pill-blue',
-    highlights: [
-      'Cours de fondamentaux d\'hospitalité, expérience client et codes du luxe/lifestyle.',
-      'Modules de Sommellerie, initiation à la dégustation et création de carte des vins.',
-      'Enseignement du management d\'équipe, recrutement et culture d\'entreprise en restauration.',
-    ],
-  },
-  {
-    period: 'PARCOURS TERRAIN',
-    role: 'Direction d\'Exploitation & Sommellerie',
-    company: 'Restaurants Étoilés, Maisons d\'Exception & Bars à Vins',
-    badge: '30 Ans d\'Histoire',
-    pillColor: 'badge-pill-teal',
-    highlights: [
-      '30 années de terrain : plonge, service, réceptions, sommellerie et direction générale.',
-      'Pilotage et ouverture d\'établissements d\'exception (Annecy, Lyon, Val d\'Isère).',
-      'Gestion d\'événements intimistes ou géants (jusqu\'à 1 000 convives).',
-      'Management d\'équipes passionnées, recrutement et structuration de la culture d\'accueil.',
-      'Vente de flacons de 10 € à 12 000 € avec la même passion d\'histoire et de partage.',
-    ],
-  },
-];
-
-const skills = [
-  { category: 'Sommellerie & Dégustation', list: ['Sélection cuvées & pépites', 'Accords mets-vins audacieux', 'Ingénierie de cartes des vins', 'Storytelling des terroirs'] },
-  { category: 'Management & Direction', list: ['Direction d\'exploitation', 'Leadership de terrain', 'Recrutement & fidélisation', 'Gestion des ouvertures'] },
-  { category: 'Transmission & Médias', list: ['Animation de chroniques radio', 'Prise de parole & Conférences', 'Ingénierie pédagogique', 'Ateliers dégustation B2B'] },
-  { category: 'Hospitalité & Expérience', list: ['Nouveaux codes restauration', 'Hôtellerie lifestyle & luxe', 'Gestion d\'événements majeurs', 'Culture de l\'accueil'] },
-];
-
-export default function CVPage() {
+export default function ParcoursPage() {
   return (
-    <div className="space-y-20 py-12 pb-24">
-      
-      {/* HERO BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FCFF97] text-[#161720] p-10 sm:p-14 rounded-3xl shadow-xl relative overflow-hidden">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
-            <span className="badge-pill badge-pill-blue">
-              <FileText className="w-3.5 h-3.5 text-[#FCFF97]" /> PARCOURS PROFESSIONNEL
-            </span>
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-white/80 backdrop-blur-md px-3.5 py-1 rounded-full border border-gray-200">
-              <Lock className="w-3.5 h-3.5 text-[#FF4F14]" /> PROFIL WEB INTERACTIF
-            </div>
-          </div>
+    <>
+      <PageHero
+        colorway="ink"
+        kicker="Direction d’exploitation · hôtellerie, restauration & expérience client"
+        lines={['Trente ans', 'de terrain']}
+        script="jamais derrière un bureau"
+        scriptX="6%"
+        scriptScale={0.36}
+        scriptAvailable="min(calc(100vw - 3rem), 36rem)"
+        lead="De la plonge à la direction. Des restaurants de quartier aux maisons étoilées, de Genève à Val d'Isère. Ouvertures, missions de transition, entrepreneuriat et sommellerie."
+        photo={{
+          src: '/photos/sabrina_photo_55.jpg',
+          alt: 'Rangée de bouteilles alignées sur le bar d’un établissement',
+        }}
+      />
 
-          <div className="max-w-3xl space-y-3">
-            <h1 className="font-bodoni text-4xl sm:text-6xl font-bold tracking-tight text-[#161720] leading-none">
-              SABRINA CARLIER
-            </h1>
-            <p className="font-script text-2xl text-[#FF4F14] font-semibold">
-              Direction d&apos;Exploitation • Sommellerie d&apos;Émotion • Enseignement & Médias
-            </p>
-            <p className="text-gray-800 text-sm sm:text-base leading-relaxed">
-              30 ans au cœur des restaurants et de l&apos;hospitalité. Un parcours ancré dans la passion du terrain, le management humain et l&apos;art du partage autour du vin.
-            </p>
-          </div>
+      {/* ── TIMELINE ─────────────────────────────────────────────────────── */}
+      <section data-cw="paper" className="relative">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <p className="t-label" style={{ color: 'var(--quiet)' }}>
+            Expérience professionnelle
+          </p>
+
+          <ol className="mt-12">
+            {ROLES.map((role, i) => (
+              <Reveal key={role.period + role.place}>
+                <li
+                  className="grid gap-6 border-t-2 border-ink py-10 lg:grid-cols-12 lg:gap-12"
+                  style={i === 0 ? undefined : { borderTopWidth: '1px', borderColor: 'var(--rule)' }}
+                >
+                  <div className="lg:col-span-4">
+                    <p className="t-label" style={{ color: 'var(--accent)' }}>{role.period}</p>
+                    {role.kind ? (
+                      <p className="t-ui mt-3 text-xs" style={{ color: 'var(--quiet)' }}>
+                        {role.kind}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  <div className="lg:col-span-8">
+                    <h2 className="t-display text-[length:var(--text-display-sm)]">
+                      {role.role}
+                    </h2>
+                    <p className="t-script mt-1 text-[clamp(1.25rem,2.6vw,1.875rem)] text-electric">
+                      {role.place}
+                    </p>
+
+                    <ul className="mt-5 max-w-3xl">
+                      {role.highlights.map((h) => (
+                        <li
+                          key={h}
+                          className="flex items-baseline gap-3 border-t py-2.5 text-[0.9375rem]"
+                          style={{ borderColor: 'var(--rule)' }}
+                        >
+                          <span aria-hidden="true" className="shrink-0 opacity-50">
+                            —
+                          </span>
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
 
-      {/* TIMELINE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-8 sm:p-12 rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(22,23,32,0.04)] space-y-10">
-          
-          <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-            <h2 className="font-bodoni text-3xl font-bold text-[#161720] flex items-center gap-3">
-              <Briefcase className="w-6 h-6 text-[#FF4F14]" /> REPÈRES DE CARRIÈRE & EXPÉRIENCES
-            </h2>
-          </div>
+      {/* ── SKILLS ───────────────────────────────────────────────────────── */}
+      <section data-cw="ink" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
 
-          <div className="space-y-8 relative before:absolute before:inset-0 before:left-5 sm:before:left-7 before:w-0.5 before:bg-gray-200">
-            {careerMilestones.map((item, idx) => (
-              <div key={idx} className="relative pl-12 sm:pl-16 space-y-3">
-                
-                {/* Node dot */}
-                <div className="absolute left-3.5 sm:left-5.5 top-2 w-3.5 h-3.5 bg-[#4747F4] rounded-full border-2 border-white shadow-sm -translate-x-1/2" />
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <h2
+            className="t-display text-[length:var(--text-display-md)]"
+            style={{ color: 'var(--display)' }}
+          >
+            Compétences
+          </h2>
 
-                <div className="bg-[#FAF9F6] p-7 rounded-2xl border border-gray-100 space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className={`badge-pill ${item.pillColor}`}>
-                      {item.period}
-                    </span>
-                    <span className="text-xs font-semibold text-gray-600 bg-white px-3 py-1 rounded-full border border-gray-200">
-                      {item.badge}
-                    </span>
-                  </div>
-
-                  <div>
-                    <h3 className="font-bodoni font-bold text-2xl text-[#161720]">{item.role}</h3>
-                    <p className="font-script text-lg text-[#4747F4] font-semibold">{item.company}</p>
-                  </div>
-
-                  <ul className="space-y-2.5 pt-2 border-t border-gray-200/60">
-                    {item.highlights.map((h, hIdx) => (
-                      <li key={hIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">
-                        <CheckCircle2 className="w-4 h-4 text-[#FF4F14] shrink-0 mt-0.5" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
+          <div className="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+            {SKILLS.map((skill, i) => (
+              <Reveal key={skill.title} delay={i * 40}>
+                <div className="border-t pt-5" style={{ borderColor: 'var(--rule)' }}>
+                  <h3 className="t-label" style={{ color: 'var(--display)' }}>
+                    {skill.title}
+                  </h3>
+                  <p className="mt-3 text-[0.9375rem]" style={{ color: 'var(--quiet)' }}>
+                    {skill.body}
+                  </p>
                 </div>
-
-              </div>
+              </Reveal>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* SKILLS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="badge-pill badge-pill-lavender">
-            <Star className="w-3.5 h-3.5 text-[#FF4F14]" /> COMPÉTENCES CLÉS
-          </span>
-          <h2 className="font-bodoni text-3xl sm:text-4xl font-bold text-[#161720] tracking-tight">
-            SAVOIR-FAIRE & EXPERTISES
-          </h2>
-        </div>
+      {/* ── EDUCATION + CTA ──────────────────────────────────────────────── */}
+      <section data-cw="lemon" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skills.map((s, idx) => (
-            <div key={idx} className="card-modern p-7 space-y-4">
-              <h3 className="font-bodoni font-bold text-xl text-[#FF4F14] border-b border-gray-100 pb-3">
-                {s.category}
-              </h3>
-              <ul className="space-y-2.5 text-xs font-medium text-gray-700">
-                {s.list.map((item, itemIdx) => (
-                  <li key={itemIdx} className="flex items-center gap-2">
-                    <Sparkles className="w-3.5 h-3.5 text-[#4747F4]" /> {item}
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-24">
+          <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <h2
+                className="t-display text-[length:var(--text-display-md)]"
+                style={{ color: 'var(--display)' }}
+              >
+                Formation
+              </h2>
+
+              <ul className="mt-10">
+                {EDUCATION.map((e) => (
+                  <li
+                    key={e.year}
+                    className="flex items-baseline gap-6 border-t py-4"
+                    style={{ borderColor: 'var(--rule)' }}
+                  >
+                    <span className="t-label shrink-0">{e.year}</span>
+                    <span>{e.label}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#4747F4] text-white p-10 sm:p-12 rounded-3xl shadow-xl text-center space-y-4">
-          <h2 className="font-bodoni text-3xl sm:text-4xl font-bold text-white">
-            ENVIE DE COLLABORER SUR UN PROJET SUR-MESURE ?
-          </h2>
-          <p className="text-sm text-blue-100 max-w-xl mx-auto">
-            Écrivez directement à <span className="font-bold text-[#FCFF97]">hello@sabrinacarlier.fr</span> pour échanger avec Sabrina.
-          </p>
-          <div className="pt-2">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 bg-[#FF4F14] text-white font-anton text-xs tracking-widest px-8 py-4 rounded-full hover:bg-white hover:text-[#161720] transition-colors shadow-lg"
-            >
-              ME CONTACTER
-            </Link>
+            <div className="lg:col-span-6 lg:pt-4">
+              <p className="t-script text-[clamp(1.75rem,4vw,2.75rem)]" style={{ color: 'var(--script)' }}>
+                Une mission de transition, une ouverture, une carte à repenser ?
+              </p>
+              <Link href="/contact" className="btn btn--solid mt-8">
+                Me contacter
+              </Link>
+            </div>
           </div>
         </div>
       </section>
-
-    </div>
+    </>
   );
 }

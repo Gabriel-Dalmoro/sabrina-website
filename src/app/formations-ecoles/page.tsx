@@ -1,158 +1,167 @@
-import Link from 'next/link';
-import { GraduationCap, Award, BookOpen, Users, Briefcase, CheckCircle2, Building, Sparkles } from 'lucide-react';
+import PageHero from '@/components/PageHero';
+import PhotoPlate from '@/components/PhotoPlate';
+import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
-  title: 'Écoles & Formations - Hospitalité, Management & Sommelerie | Sabrina Carlier',
-  description: 'Interventions en écoles supérieures et formations professionnelles. Hospitalité, Sommellerie, Management et Entrepreneuriat par Sabrina Carlier (ISG Luxury Management).',
+  title: 'Écoles & formations',
+  description:
+    "Interventions en écoles supérieures et formations professionnelles : hospitalité, management, sommellerie et entrepreneuriat. Sabrina Carlier, intervenante à l'ISG Luxury Management Lyon et Genève.",
 };
 
-const domains = [
+/** Verbatim from "Page 5 — École et Formation". */
+const DOMAINS = [
   {
-    title: 'Hospitalité & Expérience Client',
-    icon: Award,
-    badge: 'LUXE & LIFESTYLE',
-    textColor: 'text-[#4747F4]',
+    title: 'Hospitalité & expérience client',
     items: [
-      'Les fondamentaux de l\'hospitalité',
-      'L\'expérience client d\'excellence',
-      'Les nouveaux codes de la restauration moderne',
-      'L\'hôtellerie lifestyle et les palaces',
+      "Les fondamentaux de l'hospitalité",
+      "L'expérience client",
+      'Les nouveaux codes de la restauration',
+      "L'hôtellerie lifestyle et les palaces",
     ],
   },
   {
-    title: 'Management & Leadership',
-    icon: Users,
-    badge: 'TERRAIN & ÉQUIPE',
-    textColor: 'text-[#FF4F14]',
+    title: 'Management',
     items: [
       'Manager une équipe en restauration',
-      'Recruter et fidéliser les talents',
-      'Construire une culture d\'entreprise forte',
-      'Gérer une ouverture d\'établissement',
-      'Accompagner le changement & leadership de terrain',
+      'Recruter et fidéliser',
+      "Construire une culture d'entreprise",
+      'Gérer une ouverture',
+      'Accompagner le changement',
+      'Leadership de terrain',
     ],
   },
   {
-    title: 'Vin & Sommellerie d\'Émotion',
-    icon: BookOpen,
-    badge: 'ANALYSE & CARTES',
-    textColor: 'text-[#0AAE98]',
+    title: 'Vin & sommellerie',
     items: [
-      'Initiation à la dégustation et à l\'analyse sensorielle',
-      'Construire une carte des vins rentable et vivante',
-      'Accords mets-vins & storytelling gastronomique',
-      'L\'émotion dans la dégustation',
+      'Initiation à la dégustation',
+      'Construire une carte des vins',
+      'Accords mets-vins',
+      'Storytelling autour du vin',
+      "L'émotion dans la dégustation",
     ],
   },
   {
-    title: 'Entrepreneuriat & Restauration',
-    icon: Briefcase,
-    badge: 'PROJET & CONCEPT',
-    textColor: 'text-[#161720]',
+    title: 'Entrepreneuriat',
     items: [
-      'Concevoir un concept de restaurant de A à Z',
-      'Construire une offre stratégique et cohérente',
-      'Développer un projet & pilotage d\'exploitation',
-      'Accompagnement aux ouvertures d\'établissements',
+      'Concevoir un concept de restaurant',
+      'Construire une offre',
+      'Développer un projet',
+      "Ouverture d'établissement",
     ],
   },
 ];
 
 export default function FormationsPage() {
   return (
-    <div className="space-y-20 py-12 pb-24">
-      
-      {/* HERO BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#0AAE98] text-white p-10 sm:p-14 rounded-3xl shadow-xl relative overflow-hidden">
-          <div className="max-w-3xl space-y-4">
-            <span className="badge-pill badge-pill-yellow">
-              <GraduationCap className="w-3.5 h-3.5 text-[#FF4F14]" /> ENSEIGNEMENT & FORMATION
-            </span>
-            <h1 className="font-bodoni text-4xl sm:text-6xl font-bold tracking-tight text-white leading-none">
-              ÉCOLES & INTERVENTIONS
-            </h1>
-            <p className="font-script text-2xl text-[#FCFF97] font-semibold">
-              Transmettre le terrain, la rigueur et la passion du métier aux futurs leaders de la gastronomie.
-            </p>
-            <p className="text-teal-100 text-sm sm:text-base leading-relaxed">
-              Intervenante régulière dans les grandes écoles supérieures de management et d&apos;hospitalité à Lyon et Genève.
-            </p>
-          </div>
-        </div>
-      </section>
+    <>
+      {/* No script on the mint colourway — see the note in globals.css. */}
+      <PageHero
+        colorway="mint"
+        kicker="Écoles supérieures & équipes en poste"
+        lines={['Écoles &', 'formations']}
+        lead="Trente ans de terrain, transmis à celles et ceux qui arrivent. Intervenante à l'ISG Luxury Management de Lyon et de Genève, en hospitalité et wine business — et auprès des équipes qui veulent remettre l'accueil au centre."
+        photo={{
+          src: '/photos/sabrina_photo_56.jpg',
+          alt: 'Sabrina Carlier animant une session autour de bouteilles, face à un groupe',
+        }}
+      />
 
-      {/* INSTITUTIONAL REFERENCE HIGHLIGHT */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FCFF97] p-8 sm:p-10 rounded-3xl shadow-sm border border-gray-200 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-5">
-            <div className="w-14 h-14 bg-[#4747F4] text-white rounded-2xl flex items-center justify-center font-anton text-2xl font-bold shadow-md">
-              ISG
-            </div>
-            <div>
-              <span className="text-xs font-anton tracking-widest text-[#FF4F14] uppercase block">RÉFÉRENCE ACADÉMIQUE</span>
-              <h2 className="font-bodoni text-2xl sm:text-3xl font-bold text-[#161720]">
-                ISG LUXURY MANAGEMENT – GENÈVE ET LYON
+      {/* ── SCHOOL ───────────────────────────────────────────────────────── */}
+      <section data-cw="ink" className="relative">
+        <span aria-hidden="true" className="grain-layer" />
+
+        <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-20">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="t-label" style={{ color: 'var(--quiet)' }}>
+                Référence académique
+              </p>
+              <h2
+                className="t-display mt-4 text-[length:var(--text-display-md)]"
+                style={{ color: 'var(--display)' }}
+              >
+                ISG Luxury Management
               </h2>
-              <p className="text-xs font-semibold text-gray-700 mt-1">
-                Intervenante en Hospitality Management & Wine Business
+              <p className="t-lead mt-4">
+                Genève et Lyon — intervenante en Hospitality &amp; Wine.
+              </p>
+            </div>
+
+            <div className="lg:col-span-5">
+              <p className="t-script text-[clamp(1.5rem,3.5vw,2.5rem)]" style={{ color: 'var(--script)' }}>
+                On n&apos;enseigne bien que ce qu&apos;on a vraiment fait.
               </p>
             </div>
           </div>
-          <span className="badge-pill bg-white text-[#161720] shadow-sm">
-            <Building className="w-3.5 h-3.5 text-[#0AAE98]" /> Lyon & Genève
-          </span>
         </div>
       </section>
 
-      {/* DOMAINS GRID */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="badge-pill badge-pill-lavender">
-            PROGRAMMES & EXPÉRIMENTATIONS
-          </span>
-          <h2 className="font-bodoni text-3xl sm:text-4xl font-bold text-[#161720] tracking-tight">
-            MES DOMAINES D&apos;INTERVENTION
-          </h2>
-        </div>
+      {/* ── DOMAINS ──────────────────────────────────────────────────────── */}
+      <section data-cw="paper" className="relative">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
+          <Reveal>
+            <p className="t-label" style={{ color: 'var(--quiet)' }}>
+              Programmes
+            </p>
+            <h2 className="t-display mt-4 text-[length:var(--text-display-md)]">
+              Mes domaines
+              <br />
+              d&apos;intervention
+            </h2>
+          </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {domains.map((domain, idx) => {
-            const Icon = domain.icon;
-            return (
-              <div key={idx} className="card-modern p-8 space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-[#FAF9F6] text-[#161720] rounded-xl flex items-center justify-center border border-gray-200">
-                      <Icon className={`w-5 h-5 ${domain.textColor}`} />
+          <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-8">
+              <div className="grid gap-x-14 gap-y-12 sm:grid-cols-2">
+                {DOMAINS.map((domain, i) => (
+                  <Reveal key={domain.title} delay={i * 60}>
+                    <div className="flex items-baseline gap-4">
+                      <span className="t-label" style={{ color: 'var(--accent)' }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <h3 className="t-display text-[length:var(--text-display-sm)]">
+                        {domain.title}
+                      </h3>
                     </div>
-                    <h3 className="font-bodoni font-bold text-2xl text-[#161720]">{domain.title}</h3>
-                  </div>
-                  <span className="text-[10px] font-anton tracking-widest text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
-                    {domain.badge}
-                  </span>
-                </div>
 
-                <ul className="space-y-3 pt-2">
-                  {domain.items.map((item, itemIdx) => (
-                    <li key={itemIdx} className="flex items-start gap-3 text-sm text-gray-700">
-                      <CheckCircle2 className={`w-4 h-4 ${domain.textColor} shrink-0 mt-0.5`} />
-                      <span className="font-medium">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                    <ul className="mt-5">
+                      {domain.items.map((item) => (
+                        <li
+                          key={item}
+                          className="border-t py-2.5 text-[0.9375rem]"
+                          style={{ borderColor: 'var(--rule)' }}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </Reveal>
+                ))}
               </div>
-            );
-          })}
+            </div>
+
+            <div className="lg:col-span-4">
+              <Reveal className="lg:sticky lg:top-28">
+                <PhotoPlate
+                  src="/photos/sabrina_photo_01.jpg"
+                  alt="Promotion d’étudiants pendant un cours de Sabrina Carlier"
+                  offset="var(--color-lilac)"
+                  ratio="aspect-[3/4]"
+                  sizes="(max-width: 1024px) 100vw, 30vw"
+                />
+                <p className="t-ui mt-6 text-xs" style={{ color: 'var(--quiet)' }}>
+                  Chaque module s&apos;adapte au niveau du groupe et au temps
+                  disponible — d&apos;une intervention ponctuelle à un cycle
+                  complet.
+                </p>
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* FORM */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ContactForm defaultSubject="Formation & Enseignement" />
-      </section>
-
-    </div>
+      <ContactForm defaultSubject="Intervention en école ou formation" />
+    </>
   );
 }
