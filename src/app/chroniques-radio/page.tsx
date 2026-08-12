@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { Radio, Play, ExternalLink, Sparkles, Volume2, ArrowRight, Mail, Mic } from 'lucide-react';
+import { Radio, Play, ExternalLink, Volume2, ArrowRight, Mic, Sparkles } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
@@ -10,23 +9,19 @@ export const metadata = {
 
 export default function RadioPage() {
   return (
-    <div className="space-y-16 py-12 pb-24">
+    <div className="space-y-20 py-12 pb-24">
       
       {/* HEADER BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#4747F4] text-white p-8 sm:p-12 rounded-3xl border-3 border-[#12131A] pop-shadow-lg relative overflow-hidden">
-          <div className="absolute top-4 right-4 bg-[#FCFF97] text-[#12131A] font-anton text-xs px-3 py-1 rounded-full border border-[#12131A] rotate-3 hidden sm:block">
-            🎙️ CHRONIQUE FRANCE BLEU
-          </div>
-
+        <div className="bg-[#4747F4] text-white p-10 sm:p-14 rounded-3xl shadow-xl relative overflow-hidden">
           <div className="max-w-3xl space-y-4">
-            <span className="sticker-badge bg-[#FCFF97] text-[#12131A]">
-              <Radio className="w-4 h-4 text-[#FF4F14]" /> MÉDIA & PODCAST
+            <span className="badge-pill badge-pill-yellow">
+              <Radio className="w-3.5 h-3.5 text-[#FF4F14]" /> FRANCE BLEU • CHRONIQUE RADIO
             </span>
-            <h1 className="font-anton text-4xl sm:text-6xl tracking-wide text-white leading-none">
+            <h1 className="font-bodoni text-4xl sm:text-6xl font-bold tracking-tight text-white leading-none">
               LES 400 COUPS
             </h1>
-            <p className="font-bodoni italic text-xl sm:text-2xl text-[#FCFF97] font-medium">
+            <p className="font-script text-2xl text-[#FCFF97] font-medium">
               &quot;Goûter un vin, ce n&apos;est pas seulement poser son verre au-dessus d&apos;une nappe blanche...&quot;
             </p>
             <p className="text-blue-100 text-sm sm:text-base leading-relaxed">
@@ -36,14 +31,18 @@ export default function RadioPage() {
         </div>
       </section>
 
-      {/* VERBATIM TEXT CONTENT SECTION */}
+      {/* STORY & PLAYER SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
-          {/* Main Verbatim Story Block */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border-3 border-[#12131A] pop-shadow space-y-6 text-gray-800 leading-relaxed">
+          {/* Main Story */}
+          <div className="lg:col-span-7 bg-white p-8 sm:p-12 rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(22,23,32,0.04)] space-y-6 text-gray-800 leading-relaxed">
             
-            <h2 className="font-anton text-2xl sm:text-3xl text-[#12131A]">
+            <span className="badge-pill badge-pill-lavender">
+              L&apos;ESPRIT DE LA CHRONIQUE
+            </span>
+
+            <h2 className="font-bodoni text-3xl font-bold text-[#161720]">
               PLUS DE CERTITUDES, PLUS D&apos;IDÉES TOUTES FAITES
             </h2>
 
@@ -59,9 +58,9 @@ export default function RadioPage() {
               Je les aime tous, chacun à leur manière, avec leur histoire, leurs racines et les femmes et les hommes qui les façonnent.
             </p>
 
-            <div className="bg-[#FAF9F5] p-6 rounded-2xl border-2 border-[#12131A] pop-shadow space-y-3">
-              <span className="font-anton text-lg text-[#4747F4] block">L&apos;ESPRIT DES 400 COUPS</span>
-              <p className="text-sm italic">
+            <div className="bg-[#FAF9F6] p-6 rounded-2xl border border-gray-200 space-y-3">
+              <span className="font-anton text-xs text-[#4747F4] tracking-widest block">CHRONIQUE RADIO</span>
+              <p className="text-sm italic text-gray-700">
                 &quot;Les 400 Coups, ce sont toutes ces histoires. Des histoires de vignerons, de bouteilles et de territoires. Des histoires de pairings, cet art d’associer deux éléments pour qu’ensemble ils racontent quelque chose de plus grand.&quot;
               </p>
             </div>
@@ -70,7 +69,7 @@ export default function RadioPage() {
               Goûter un vin, ce n’est pas seulement poser son verre au-dessus d’une nappe blanche, observer sa couleur et tenter d’en deviner le cépage, la région, voire le domaine. Ce n’est pas non plus le faire tourner pendant dix minutes en cherchant désespérément des arômes que l’on ne sent pas.
             </p>
 
-            <p className="font-bold text-[#12131A] text-lg">
+            <p className="font-bold text-[#161720] text-lg">
               Car ce ne sont pas toujours les vins que nous dégustons qui restent dans nos mémoires, mais les personnes avec lesquelles nous les partageons.
             </p>
 
@@ -78,28 +77,28 @@ export default function RadioPage() {
               Les discussions, les rires, les rencontres, les silences parfois : voilà ce qui rend les goûts inoubliables. À travers ces chroniques, je vous invite à découvrir le vin autrement : avec curiosité, liberté et émotion.
             </p>
 
-            <div className="pt-4 border-t-2 border-gray-100 flex items-center justify-between">
+            <div className="pt-4 border-t border-gray-100">
               <span className="font-script text-[#FF4F14] text-xl font-bold">Bienvenue dans l’univers des 400 Coups.</span>
             </div>
 
           </div>
 
-          {/* Player & Radio Pitch Sidebar */}
+          {/* Player Sidebar */}
           <div className="lg:col-span-5 space-y-6">
             
-            {/* France Bleu Player Embed Card */}
-            <div className="bg-[#FCFF97] p-6 sm:p-8 rounded-3xl border-3 border-[#12131A] pop-shadow space-y-6">
+            {/* France Bleu Player */}
+            <div className="bg-[#FCFF97] p-8 rounded-3xl shadow-sm space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-[#FF4F14] text-white rounded-full flex items-center justify-center border-2 border-[#12131A] pop-shadow">
+                <div className="w-12 h-12 bg-[#FF4F14] text-white rounded-full flex items-center justify-center shadow-sm">
                   <Volume2 className="w-6 h-6 animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="font-anton text-xl text-[#12131A]">FRANCE BLEU PODCAST</h3>
-                  <span className="text-xs font-bold text-gray-700">Écoutez les épisodes en ligne</span>
+                  <h3 className="font-bodoni font-bold text-xl text-[#161720]">FRANCE BLEU PODCAST</h3>
+                  <span className="text-xs text-gray-700">Écoutez les épisodes en replay</span>
                 </div>
               </div>
 
-              <p className="text-xs text-[#12131A] leading-relaxed">
+              <p className="text-xs text-gray-800 leading-relaxed">
                 Retrouvez toutes les éditions diffusées de la chronique &quot;Les 400 Coups&quot; sur le site officiel de Radio France.
               </p>
 
@@ -107,24 +106,24 @@ export default function RadioPage() {
                 href="https://www.radiofrance.fr/francebleu/podcasts/les-400-coups-4969189"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#4747F4] text-white font-anton text-center py-3.5 px-4 rounded-xl border-2 border-[#12131A] pop-shadow hover:bg-[#FF4F14] transition-colors flex items-center justify-center gap-2 text-base"
+                className="w-full bg-[#4747F4] text-white font-anton text-xs tracking-widest text-center py-4 px-4 rounded-full hover:bg-[#FF4F14] transition-colors flex items-center justify-center gap-2 shadow-md"
               >
-                <Play className="w-5 h-5 fill-white" /> ÉCOUTER SUR FRANCE BLEU
-                <ExternalLink className="w-4 h-4" />
+                <Play className="w-4 h-4 fill-white" /> ÉCOUTER SUR FRANCE BLEU
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
 
-            {/* Pitch for Radio Stations */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl border-3 border-[#12131A] pop-shadow space-y-4">
-              <span className="sticker-badge bg-[#E6CEFC] text-[#12131A]">
-                <Mic className="w-4 h-4 text-[#4747F4]" /> POUR LES STATIONS RADIO
+            {/* Pitch for Stations */}
+            <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-[0_10px_30px_rgba(22,23,32,0.04)] space-y-4">
+              <span className="badge-pill badge-pill-teal">
+                <Mic className="w-3.5 h-3.5" /> POUR LES STATIONS RADIO
               </span>
-              <h3 className="font-anton text-2xl text-[#12131A]">PROPOSER UNE CHRONIQUE</h3>
+              <h3 className="font-bodoni font-bold text-2xl text-[#161720]">PROPOSER UNE CHRONIQUE</h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Vous recherchez une intervenante captivante, authentique et expérimentée pour des chroniques quotidiennes ou hebdomadaires ?
+                Vous recherchez une chroniqueuse passionnée, authentique et expérimentée pour des chroniques quotidiennes ou hebdomadaires ?
               </p>
 
-              <ul className="text-xs space-y-2 font-bold text-[#12131A]">
+              <ul className="text-xs space-y-2.5 font-semibold text-gray-800">
                 <li className="flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-[#FF4F14]" /> Formats courts (2 à 5 min)
                 </li>
@@ -135,13 +134,6 @@ export default function RadioPage() {
                   <Sparkles className="w-3.5 h-3.5 text-[#FF4F14]" /> Portraits de vignerons & émotions
                 </li>
               </ul>
-
-              <a
-                href="#contact-radio"
-                className="inline-flex items-center gap-2 text-xs font-anton text-[#4747F4] hover:text-[#FF4F14] transition-colors pt-2"
-              >
-                DISCUTER D&apos;UNE COLLABORATION <ArrowRight className="w-4 h-4" />
-              </a>
             </div>
 
           </div>
@@ -149,8 +141,8 @@ export default function RadioPage() {
         </div>
       </section>
 
-      {/* CONTACT FORM SECTION */}
-      <section id="contact-radio" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* CONTACT FORM */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <ContactForm defaultSubject="Chroniques Radio" />
       </section>
 

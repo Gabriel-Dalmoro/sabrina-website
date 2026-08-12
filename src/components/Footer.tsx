@@ -1,93 +1,93 @@
 import Link from 'next/link';
-import { Mail, Radio, MapPin, Heart, Sparkles, ArrowUpRight } from 'lucide-react';
+import { Mail, Radio, MapPin, ArrowUpRight, Heart } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#12131A] text-white border-t-4 border-[#12131A] pt-16 pb-12 relative overflow-hidden">
-      {/* Decorative Top Accent Bar */}
-      <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-[#4747F4] via-[#FCFF97] via-[#FF4F14] via-[#0AAE98] to-[#E6CEFC]" />
+    <footer className="bg-[#161720] text-white pt-20 pb-12 relative overflow-hidden">
+      {/* Top Accent Gradient Line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#4747F4] via-[#FCFF97] via-[#FF4F14] via-[#0AAE98] to-[#E6CEFC]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           
-          {/* Brand Col */}
+          {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-[#FCFF97] text-[#12131A] font-anton text-2xl flex items-center justify-center rounded-lg border-2 border-white pop-shadow-orange">
+              <div className="w-10 h-10 bg-[#FCFF97] text-[#161720] font-anton text-xl flex items-center justify-center rounded-xl font-bold">
                 SC
               </div>
               <div>
-                <span className="font-anton text-2xl tracking-wider text-white block leading-none">
+                <span className="font-bodoni text-2xl font-bold tracking-tight text-white block leading-none">
                   SABRINA CARLIER
                 </span>
-                <span className="font-script text-[#FCFF97] text-lg font-bold">
+                <span className="font-script text-[#FCFF97] text-base">
                   Sommelerie & Émotions
                 </span>
               </div>
             </div>
 
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-400 text-sm leading-relaxed">
               30 ans de terrain, de sommellerie et d&apos;hospitalité. Transmettre le vin avec liberté, curiosité et sincérité.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0AAE98]/20 border border-[#0AAE98] text-[#0AAE98] rounded-full text-xs font-bold">
-              <MapPin className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/5 border border-white/10 text-gray-300 rounded-full text-xs">
+              <MapPin className="w-3.5 h-3.5 text-[#0AAE98]" />
               Basée à Lyon, France & Mobile
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-anton text-lg tracking-wider text-[#FCFF97] mb-4 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#FF4F14]" /> NAVIGUER
+            <h3 className="font-anton text-sm tracking-widest text-[#FCFF97] mb-5 uppercase">
+              Navigation
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-3 text-sm text-gray-300">
               <li>
-                <Link href="/" className="hover:text-[#FCFF97] transition-colors flex items-center gap-1.5">
-                  • Accueil & Story
+                <Link href="/" className="hover:text-white transition-colors">
+                  Accueil & Story
                 </Link>
               </li>
               <li>
-                <Link href="/chroniques-radio" className="hover:text-[#FCFF97] transition-colors flex items-center gap-1.5">
-                  • Chroniques Radio (Les 400 Coups)
+                <Link href="/chroniques-radio" className="hover:text-white transition-colors">
+                  Chroniques Radio (Les 400 Coups)
                 </Link>
               </li>
               <li>
-                <Link href="/ateliers-degustation" className="hover:text-[#FCFF97] transition-colors flex items-center gap-1.5">
-                  • Ateliers Dégustation B2B
+                <Link href="/ateliers-degustation" className="hover:text-white transition-colors">
+                  Ateliers Dégustation B2B
                 </Link>
               </li>
               <li>
-                <Link href="/formations-ecoles" className="hover:text-[#FCFF97] transition-colors flex items-center gap-1.5">
-                  • Écoles & Formations
+                <Link href="/formations-ecoles" className="hover:text-white transition-colors">
+                  Écoles & Formations
                 </Link>
               </li>
               <li>
-                <Link href="/conferences" className="hover:text-[#FCFF97] transition-colors flex items-center gap-1.5">
-                  • Conférence (&quot;Le vin, vecteur d&apos;émotion&quot;)
+                <Link href="/conferences" className="hover:text-white transition-colors">
+                  Conférence (&quot;Le vin, vecteur d&apos;émotion&quot;)
                 </Link>
               </li>
               <li>
-                <Link href="/cv" className="hover:text-[#FCFF97] transition-colors flex items-center gap-1.5">
-                  • Parcours & CV
+                <Link href="/cv" className="hover:text-white transition-colors">
+                  Parcours & CV Web
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Radio & Media */}
+          {/* Media & France Bleu */}
           <div>
-            <h3 className="font-anton text-lg tracking-wider text-[#E6CEFC] mb-4 flex items-center gap-2">
-              <Radio className="w-4 h-4 text-[#0AAE98]" /> MÉDIAS & PODCAST
+            <h3 className="font-anton text-sm tracking-widest text-[#E6CEFC] mb-5 uppercase">
+              Médias & Podcast
             </h3>
-            <p className="text-xs text-gray-300 mb-3 leading-relaxed">
-              Retrouvez la chronique radio &quot;Les 400 Coups&quot; sur France Bleu.
+            <p className="text-xs text-gray-400 mb-4 leading-relaxed">
+              Retrouvez la chronique radio &quot;Les 400 Coups&quot; diffusée sur France Bleu.
             </p>
             <a
               href="https://www.radiofrance.fr/francebleu/podcasts/les-400-coups-4969189"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#4747F4] text-white text-xs font-bold px-3.5 py-2 rounded-lg border border-white hover:bg-[#FF4F14] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#4747F4] text-white text-xs font-medium px-4 py-2.5 rounded-full hover:bg-[#FF4F14] transition-colors"
             >
               Écouter sur France Bleu
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -96,15 +96,15 @@ export default function Footer() {
 
           {/* Direct Contact */}
           <div>
-            <h3 className="font-anton text-lg tracking-wider text-[#FF4F14] mb-4 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-[#FCFF97]" /> CONTACT DIRECT
+            <h3 className="font-anton text-sm tracking-widest text-[#FF4F14] mb-5 uppercase">
+              Contact Direct
             </h3>
-            <p className="text-xs text-gray-300 mb-3">
-              Pour une collaboration, une intervention en école, une conférence ou un atelier entreprise :
+            <p className="text-xs text-gray-400 mb-4">
+              Pour toute intervention en entreprise, école ou média :
             </p>
             <a
               href="mailto:hello@sabrinacarlier.fr"
-              className="inline-block bg-[#FCFF97] text-[#12131A] font-anton text-sm px-4 py-2.5 rounded-lg border-2 border-[#12131A] hover:bg-[#FF4F14] hover:text-white transition-colors"
+              className="inline-block bg-[#FCFF97] text-[#161720] font-anton text-sm tracking-wider px-5 py-2.5 rounded-full hover:bg-white transition-colors"
             >
               hello@sabrinacarlier.fr
             </a>
@@ -112,11 +112,11 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+        {/* Bottom Credits */}
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
           <p>© {new Date().getFullYear()} Sabrina Carlier. Tous droits réservés.</p>
           <p className="flex items-center gap-1">
-            Créé avec <Heart className="w-3.5 h-3.5 text-[#FF4F14] fill-[#FF4F14]" /> pour une sommellerie humaine & vibrante.
+            Créé pour une sommellerie libre, humaine & élégante.
           </p>
         </div>
       </div>

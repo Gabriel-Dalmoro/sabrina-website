@@ -1,5 +1,5 @@
 import ContactForm from '@/components/ContactForm';
-import { Mail, MapPin, Radio, Sparkles, Clock, Globe } from 'lucide-react';
+import { Mail, MapPin, Radio } from 'lucide-react';
 
 export const metadata = {
   title: 'Contact - Sabrina Carlier | Sommelerie & Émotions',
@@ -8,19 +8,19 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="space-y-16 py-12 pb-24">
+    <div className="space-y-20 py-12 pb-24">
       
-      {/* HEADER SECTION */}
+      {/* HERO BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#FF4F14] text-white p-8 sm:p-12 rounded-3xl border-3 border-[#12131A] pop-shadow-lg relative overflow-hidden">
+        <div className="bg-[#FF4F14] text-white p-10 sm:p-14 rounded-3xl shadow-xl relative overflow-hidden">
           <div className="max-w-3xl space-y-4">
-            <span className="sticker-badge bg-[#FCFF97] text-[#12131A]">
-              <Mail className="w-4 h-4 text-[#FF4F14]" /> ÉCRIVEZ-MOI
+            <span className="badge-pill badge-pill-yellow">
+              <Mail className="w-3.5 h-3.5 text-[#FF4F14]" /> ÉCRIVEZ-MOI
             </span>
-            <h1 className="font-anton text-4xl sm:text-6xl tracking-wide text-white leading-none">
+            <h1 className="font-bodoni text-4xl sm:text-6xl font-bold tracking-tight text-white leading-none">
               CONTACT & COLLABORATION
             </h1>
-            <p className="font-bodoni italic text-xl sm:text-2xl text-[#FCFF97] font-medium">
+            <p className="font-script text-2xl text-[#FCFF97] font-semibold">
               Une envie d&apos;atelier, une intervention en école, une émission ou une conférence ?
             </p>
             <p className="text-orange-100 text-sm sm:text-base leading-relaxed">
@@ -30,28 +30,28 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FORM + INFO GRID SECTION */}
+      {/* FORM & SIDEBAR */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
           {/* Main Contact Form */}
           <div className="lg:col-span-8">
-            <ContactForm defaultSubject="Atelier Dégustation B2B" />
+            <ContactForm defaultSubject="Ateliers Dégustation B2B" />
           </div>
 
-          {/* Direct Info Sidebar */}
+          {/* Sidebar Info */}
           <div className="lg:col-span-4 space-y-6">
             
-            {/* Direct Email Card */}
-            <div className="bg-white p-6 rounded-3xl border-3 border-[#12131A] pop-shadow space-y-4">
-              <div className="w-12 h-12 bg-[#4747F4] text-white rounded-2xl flex items-center justify-center border-2 border-[#12131A] pop-shadow">
-                <Mail className="w-6 h-6" />
+            {/* Email Card */}
+            <div className="card-modern p-7 space-y-4">
+              <div className="w-10 h-10 bg-[#4747F4] text-white rounded-xl flex items-center justify-center shadow-sm">
+                <Mail className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs font-anton text-[#4747F4] tracking-wider uppercase block">EMAIL PROFESSIONNEL</span>
+                <span className="text-xs font-anton text-[#4747F4] tracking-widest uppercase block">EMAIL PROFESSIONNEL</span>
                 <a
                   href="mailto:hello@sabrinacarlier.fr"
-                  className="font-anton text-xl text-[#12131A] hover:text-[#FF4F14] transition-colors block break-all"
+                  className="font-bodoni font-bold text-xl text-[#161720] hover:text-[#FF4F14] transition-colors block break-all mt-1"
                 >
                   hello@sabrinacarlier.fr
                 </a>
@@ -61,34 +61,34 @@ export default function ContactPage() {
               </p>
             </div>
 
-            {/* Location & Region */}
-            <div className="bg-white p-6 rounded-3xl border-3 border-[#12131A] pop-shadow space-y-4">
-              <div className="w-12 h-12 bg-[#0AAE98] text-white rounded-2xl flex items-center justify-center border-2 border-[#12131A] pop-shadow">
-                <MapPin className="w-6 h-6" />
+            {/* Location Card */}
+            <div className="card-modern p-7 space-y-4">
+              <div className="w-10 h-10 bg-[#0AAE98] text-white rounded-xl flex items-center justify-center shadow-sm">
+                <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs font-anton text-[#0AAE98] tracking-wider uppercase block">BASE & DÉPLACEMENTS</span>
-                <h3 className="font-anton text-xl text-[#12131A]">LYON & INTERVENTIONS FRANCE / SUISSE</h3>
+                <span className="text-xs font-anton text-[#0AAE98] tracking-widest uppercase block">BASE & DÉPLACEMENTS</span>
+                <h3 className="font-bodoni font-bold text-xl text-[#161720] mt-1">LYON, FRANCE & SUISSE</h3>
               </div>
               <p className="text-xs text-gray-500 leading-relaxed">
                 Basée à Lyon. Interventions régulières en région Rhône-Alpes, Genève, Paris et toute la France.
               </p>
             </div>
 
-            {/* Radio France Bleu Badge */}
-            <div className="bg-[#FCFF97] p-6 rounded-3xl border-3 border-[#12131A] pop-shadow space-y-3">
+            {/* Media Card */}
+            <div className="bg-[#FCFF97] p-7 rounded-3xl space-y-3 shadow-sm">
               <div className="flex items-center gap-2">
-                <Radio className="w-5 h-5 text-[#FF4F14]" />
-                <span className="font-anton text-base text-[#12131A]">PRESSE & MÉDIAS</span>
+                <Radio className="w-4 h-4 text-[#FF4F14]" />
+                <span className="font-bodoni font-bold text-base text-[#161720]">PRESSE & MÉDIAS</span>
               </div>
               <p className="text-xs text-gray-800">
-                Retrouvez &quot;Les 400 Coups&quot; diffusés sur France Bleu et disponibles en replay sur Radio France.
+                Retrouvez &quot;Les 400 Coups&quot; diffusés sur France Bleu et disponibles en replay.
               </p>
               <a
                 href="https://www.radiofrance.fr/francebleu/podcasts/les-400-coups-4969189"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-xs font-anton text-[#4747F4] hover:underline"
+                className="inline-block text-xs font-anton text-[#4747F4] hover:underline pt-1"
               >
                 Écouter le podcast →
               </a>
