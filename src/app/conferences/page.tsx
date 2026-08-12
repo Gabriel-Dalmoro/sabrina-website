@@ -2,12 +2,14 @@ import PageHero from '@/components/PageHero';
 import PhotoPlate from '@/components/PhotoPlate';
 import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Le vin, vecteur d’émotion — conférence',
+export const metadata = pageMetadata({
+  title: "La conférence : Le vin, vecteur d'émotion",
   description:
-    "Une conférence-expérience en création par Sabrina Carlier, mêlant récit, dégustation et échanges avec le public. Première en entreprise à l'automne 2026, programmation publique à partir de janvier 2027.",
-};
+    "Une conférence-expérience mêlant récit, dégustation et échanges avec le public. Premières représentations en entreprise à l'automne 2026, programmation publique à partir de janvier 2027.",
+  path: "/conferences",
+});
 
 /** Verbatim from "Page 6 — Conférence". */
 const QUESTIONS = [

@@ -2,12 +2,14 @@ import PageHero from '@/components/PageHero';
 import PhotoPlate from '@/components/PhotoPlate';
 import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Bienvenue à ma table — ateliers & dîners',
+export const metadata = pageMetadata({
+  title: "Bienvenue à ma table : ateliers & dîners",
   description:
-    "Ateliers dégustation, wine dinners et dîners à quatre mains créés sur mesure par Sabrina Carlier, pour des entreprises, des équipes et des groupes privés.",
-};
+    "Ateliers dégustation, wine dinners et dîners à quatre mains sur mesure, pour entreprises, équipes et groupes privés. De 4 à 100 convives, à Lyon, Annecy et en altitude.",
+  path: "/ateliers-degustation",
+});
 
 /**
  * Sabrina's text from "Page 4 — Bienvenue à ma table". Written as a litany of

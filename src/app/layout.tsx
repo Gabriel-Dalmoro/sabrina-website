@@ -1,36 +1,67 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { fontVariables } from '@/lib/fonts';
+import { SITE_NAME, SITE_URL } from '@/lib/seo';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import JsonLd from '@/components/JsonLd';
 import FeedbackWidget from '@/components/FeedbackWidget';
 
+const DESCRIPTION =
+  "Trente ans d'hospitalité. Sabrina Carlier, sommelière à Lyon : chroniques « Les 400 Coups » sur France Bleu, ateliers et dîners autour du vin en entreprise, interventions en écoles supérieures et conférences.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sabrinacarlier.fr'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Sabrina Carlier — Sommellerie, chroniques radio & expériences autour du vin",
+    default: 'Sabrina Carlier — sommelière, chroniqueuse & formatrice à Lyon',
     template: '%s — Sabrina Carlier',
   },
-  description:
-    "Trente ans d'hospitalité. Chroniqueuse des « 400 Coups » sur France Bleu, créatrice d'ateliers et de dîners autour du vin, intervenante en écoles supérieures et conférencière.",
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: 'Sabrina Carlier' }],
+  creator: 'Sabrina Carlier',
+  alternates: { canonical: '/' },
   keywords: [
     'Sabrina Carlier',
     'sommelière Lyon',
     'Les 400 Coups France Bleu',
     'atelier dégustation entreprise',
+    'wine dinner Lyon',
     'conférence vin',
     'formation hospitalité',
     'ISG Luxury Management',
+    "directrice d'exploitation restauration",
   ],
   openGraph: {
-    title: 'Sabrina Carlier — Sommellerie, radio & expériences autour du vin',
-    description:
-      "L'hospitalité n'est pas un métier, c'est une manière de vivre. Trente ans de terrain, de rencontres et d'émotions partagées autour d'une table.",
-    url: 'https://sabrinacarlier.fr',
-    siteName: 'Sabrina Carlier',
-    locale: 'fr_FR',
     type: 'website',
+    locale: 'fr_FR',
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    title: 'Sabrina Carlier — sommelière, chroniqueuse & formatrice',
+    description: DESCRIPTION,
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sabrina Carlier — sommelière, chroniqueuse & formatrice',
+    description: DESCRIPTION,
+  },
+  /*
+   * `max-image-preview: large` is the directive that decides whether Google
+   * shows the social card or a thumbnail the size of a stamp. The snippet and
+   * video limits lift the default truncation too.
+   */
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  formatDetection: { telephone: false, address: false, email: false },
 };
 
 export default function RootLayout({
@@ -52,6 +83,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <JsonLd />
         {/* Review tool for Sabrina — remove this line before the site goes
             public. See components/FeedbackWidget.tsx. */}
         <FeedbackWidget />

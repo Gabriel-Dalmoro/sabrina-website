@@ -3,12 +3,14 @@ import PageHero from '@/components/PageHero';
 import Reveal from '@/components/Reveal';
 import Timeline from '@/components/Timeline';
 import { ROLES, EDUCATION, SKILLS } from '@/content/parcours';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Parcours',
+export const metadata = pageMetadata({
+  title: "Parcours",
   description:
-    "Le parcours professionnel de Sabrina Carlier : direction d'exploitation, sommellerie, hôtellerie et restauration — de Theillard Genève à Wine You Want, en passant par la Maison Marc Veyrat et Christian Têtedoie.",
-};
+    "Trente ans de terrain : direction d'exploitation, sommellerie et hôtellerie. De Theillard Genève à Wine You Want, en passant par la Maison Marc Veyrat et Christian Têtedoie.",
+  path: "/cv",
+});
 
 export default function ParcoursPage() {
   return (

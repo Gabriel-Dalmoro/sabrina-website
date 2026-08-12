@@ -4,12 +4,14 @@ import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
 import EpisodeList from '@/components/EpisodeList';
 import { PODCAST_URL } from '@/lib/nav';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Les 400 Coups — chroniques radio',
+export const metadata = pageMetadata({
+  title: "Les 400 Coups, la chronique radio",
   description:
-    "« Les 400 Coups », la chronique de Sabrina Carlier sur France Bleu. Des histoires de vignerons, de bouteilles et de territoires, racontées avec curiosité, liberté et émotion.",
-};
+    "Les seize chroniques « Les 400 Coups » de Sabrina Carlier sur France Bleu, à écouter en ligne. Des histoires de vignerons, de bouteilles et de territoires, racontées avec curiosité et émotion.",
+  path: "/chroniques-radio",
+});
 
 /** Sabrina's text from "Page 3 — Chroniques radio", kept whole. */
 const INTRO = [

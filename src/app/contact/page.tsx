@@ -1,12 +1,14 @@
 import PageHero from '@/components/PageHero';
 import ContactForm from '@/components/ContactForm';
 import { CONTACT_EMAIL, PODCAST_URL } from '@/lib/nav';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Contact',
+export const metadata = pageMetadata({
+  title: "Contact",
   description:
-    "Contacter Sabrina Carlier pour un atelier, un dîner en entreprise, une intervention en école, une chronique radio ou une conférence.",
-};
+    "Contacter Sabrina Carlier pour un atelier ou un dîner en entreprise, une intervention en école, une chronique radio, une conférence ou une mission de transition.",
+  path: "/contact",
+});
 
 const WHO = [
   {

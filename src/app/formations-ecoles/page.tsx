@@ -2,12 +2,14 @@ import PageHero from '@/components/PageHero';
 import PhotoPlate from '@/components/PhotoPlate';
 import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Écoles & formations',
+export const metadata = pageMetadata({
+  title: "Écoles & formations",
   description:
-    "Interventions en écoles supérieures et formations professionnelles : hospitalité, management, sommellerie et entrepreneuriat. Sabrina Carlier, intervenante à l'ISG Luxury Management Lyon et Genève.",
-};
+    "Interventions en écoles supérieures et formations professionnelles : hospitalité, management en restauration, sommellerie et entrepreneuriat. Intervenante à l'ISG Luxury Management, Lyon et Genève.",
+  path: "/formations-ecoles",
+});
 
 /** Verbatim from "Page 5 — École et Formation". */
 const DOMAINS = [
