@@ -76,8 +76,13 @@ export default function ContactForm({
       <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
+            {/* Sabrina asked for « Faisons connaissance » in place of both this
+                heading and the footer's. The footer sits directly under this
+                block on every page that carries the form, so the two cannot
+                share a phrase: the footer keeps hers — it was the element she
+                annotated — and this one becomes an invitation to write. */}
             <LayeredTitle
-              lines={['Parlez-moi', 'de votre', 'projet']}
+              lines={['Écrivez-moi']}
               script="je réponds à tout"
               size="md"
               scriptX="6%"
@@ -86,9 +91,10 @@ export default function ContactForm({
             />
 
             <p className="t-lead mt-10">
-              Une envie d&apos;atelier, une promo à faire travailler, une
-              antenne à nourrir, une scène à remplir — ou simplement une
-              question.
+              Faire grandir un établissement, transmettre à une équipe ou à des
+              étudiants, réunir des collaborateurs autour d&apos;une
+              dégustation, imaginer un atelier, une conférence ou une
+              expérience qui n&apos;existe pas encore…
             </p>
 
             <a

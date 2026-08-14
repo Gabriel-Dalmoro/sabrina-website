@@ -22,7 +22,7 @@ const EVENINGS = [
   "Il y a eu des ateliers pour quatre personnes. D'autres pour soixante. Des wine dinners réunissant cent convives autour de la même table, avec des vignerons comme invités d'honneur. Des battles entre sommeliers où les régions viticoles s'affrontaient avec passion.",
   "Il y a eu des dégustations avec les chocolats Voisin, avec la Maison Kaviari, autour de la cuisine bourgeoise avec Hubert Vergoin aux fourneaux, autour du Pérou et de l'extraordinaire Gonzalo, des huîtres, de la street food, des fromages…",
   "Il y a eu ces ateliers où, avec Nicolas Mielly, nous ouvrions de vieux millésimes de La Chapelle de Paul Jaboulet Aîné. Et ceux où je laissais volontiers la parole à ce grand orateur qu'est Amine Ghanem pour présenter mes premières Plénitude 2 de Dom Pérignon.",
-  "Il y a eu les dégustations consacrées aux vieux millésimes de Bordeaux pour l'Union des Grands Crus de Bordeaux. Et les plus intimistes, imaginées pour célébrer un cinquantième anniversaire autour des cinquante vins qu'il fallait, selon moi, avoir goûtés avant ses cinquante ans.",
+  "Il y a eu les dégustations consacrées aux vieux millésimes de Bordeaux pour l'Union des Grands Crus de Bordeaux. Et les plus intimistes, imaginées pour célébrer un cinquantième anniversaire autour des cinq vins qu'il fallait, selon moi, avoir goûtés avant ses cinquante ans.",
   "Il y a eu cet atelier si particulier animé avec ma fille aînée, tout juste diplômée de Ferrandi Paris.",
   "Il y a eu ces soirées où les vignerons, les brasseurs et les producteurs s'asseyaient simplement à table avec nous. Et celles où mon ami Teddy arrivait avec quelques vieux spiritueux dont il a le secret.",
 ];
@@ -139,7 +139,7 @@ export default function AteliersPage() {
               </ul>
 
               <p className="t-script mt-10 t-script-md" style={{ color: 'var(--script)' }}>
-                Parce que chaque table l&apos;est aussi.
+                Parce que chaque table est unique.
               </p>
             </div>
           </div>

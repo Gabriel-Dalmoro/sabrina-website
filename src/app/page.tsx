@@ -132,7 +132,8 @@ export default function HomePage() {
               <div className="measure-wide mt-8">
                 <p className="t-lead">{OPENING[0]}</p>
                 <p className="t-lead mt-4" style={{ color: 'var(--quiet)' }}>
-                  Trente ans plus tard, je n&apos;ai jamais quitté la table.
+                  Trente ans plus tard, je n&apos;ai jamais cessé
+                  d&apos;accueillir.
                 </p>
               </div>
 

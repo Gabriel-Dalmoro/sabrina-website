@@ -108,7 +108,7 @@ export const ROLES: Role[] = [
   },
   {
     period: '2013 — 2014',
-    role: 'Expériences boissons — clientèle BtoB luxe',
+    role: 'Chef de projet en sommellerie',
     place: 'Theillard SA, Genève',
     highlights: [
       'Conception et pilotage des expériences boissons pour le Salon International de la Haute Horlogerie, Hermès, Cartier, JTI, Procter & Gamble.',

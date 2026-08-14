@@ -11,7 +11,7 @@ export default function Footer() {
       <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-24">
         <LayeredTitle
           as="p"
-          lines={['On se dit', 'quoi ?']}
+          lines={['Faisons', 'connaissance']}
           script="autour d'un verre"
           size="lg"
           scriptX="18%"
