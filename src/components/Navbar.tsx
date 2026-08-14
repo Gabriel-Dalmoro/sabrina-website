@@ -18,11 +18,40 @@ export default function Navbar() {
     };
 
     document.addEventListener('keydown', onKey);
-    document.body.style.overflow = 'hidden';
+
+    /*
+     * Lock the scroll on <html>, never on <body>.
+     *
+     * `overflow: hidden` turns an element into a scroll container, and
+     * position:sticky resolves against the nearest one. Locking the body made
+     * it that container — so the header stopped sticking to the viewport and
+     * stuck to the top of the document instead, leaving the menu open with no
+     * visible way to close it unless you happened to be at the top of the
+     * page. <html> is already the scrollport, so hiding its overflow freezes
+     * the page without moving the header's frame of reference. Same reason
+     * both elements use `overflow-x: clip` rather than `hidden` in
+     * globals.css.
+     */
+    const html = document.documentElement;
+    const previous = html.style.overflow;
+    html.style.overflow = 'hidden';
+
+    /*
+     * An iPad held in portrait sits below `lg`, so it gets this menu. Rotate
+     * it to landscape and the panel and its close button both disappear at the
+     * breakpoint — leaving the page locked with nothing to unlock it. Close on
+     * the way past.
+     */
+    const desktop = window.matchMedia('(min-width: 64rem)');
+    const onBreakpoint = () => {
+      if (desktop.matches) setOpen(false);
+    };
+    desktop.addEventListener('change', onBreakpoint);
 
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = '';
+      desktop.removeEventListener('change', onBreakpoint);
+      html.style.overflow = previous;
     };
   }, [open]);
 
@@ -79,7 +108,7 @@ export default function Navbar() {
         <div
           id="menu-mobile"
           data-cw="ink"
-          className="fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto sm:top-20 lg:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto overscroll-contain sm:top-20 lg:hidden"
         >
           <span aria-hidden="true" className="grain-layer fixed inset-0" />
           <nav
