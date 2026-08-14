@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sabrinacarlier.fr
 
-## Getting Started
-
-First, run the development server:
+Site for Sabrina Carlier — sommelière, chroniqueuse and formatrice in Lyon.
+Next.js App Router, Tailwind v4, deployed on Vercel.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build
+npm run lint
+npm run contrast   # WCAG AA audit of every page, needs the dev server running
+npm run shots <outDir> <route…>   # desktop + mobile screenshots
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Sabrina's review widget
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A tool for her, not a feature of the site: she points at any element, writes a
+note, and downloads the lot as one Markdown file to email over.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+It is **on** in local development and on every Vercel preview deployment, and
+**off** in production unless you opt in.
 
-## Learn More
+| Where | How |
+| --- | --- |
+| Local dev | always on |
+| Vercel preview | always on |
+| Vercel production | only with `NEXT_PUBLIC_FEEDBACK=1` |
 
-To learn more about Next.js, take a look at the following resources:
+**To open a review round:** add `NEXT_PUBLIC_FEEDBACK` = `1` to the Vercel
+project's Production environment, redeploy, send her the link.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**To close it / launch:** delete the variable and redeploy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The switch is real, not cosmetic. `next.config.ts` aliases the widget to a stub
+when the flag is off, so the tool and its notes are absent from the public
+bundle rather than merely hidden — see `src/lib/flags.ts`.
 
-## Deploy on Vercel
+## Where things live
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| | |
+| --- | --- |
+| `src/app/globals.css` | the design system: colour tokens, the seven colourways, every component class |
+| `src/content/` | Sabrina's texts, her CV, the radio episodes — prose kept out of JSX |
+| `src/lib/seo.ts` | `SITE_URL` and the per-page metadata helper |
+| `src/components/Wordmark.tsx` | placeholder mark, to be swapped for her new logo |
+| `.devtools/` | asset generator and Playwright audits, not part of the build |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`SITE_URL` must match the domain Vercel serves **without** redirecting.
+Currently `www`, with the apex 308-ing to it. If that ever flips, change the
+constant in the same commit — canonical URLs, `og:image`, JSON-LD and the
+sitemap all derive from it, and WhatsApp will not follow a redirect to fetch a
+preview image.
+
+## Brand assets
+
+`favicon.ico`, `apple-icon.png` and `opengraph-image.jpg` are generated, not
+hand-made, and committed to `src/app/`:
+
+```bash
+python3 .devtools/make-brand-assets.py
+```

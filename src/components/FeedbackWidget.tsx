@@ -40,7 +40,8 @@ const REVIEW_EMAIL = 'gabriel@gabrieldalmoro.com';
  * is transmitted until she copies, downloads or emails them. That also means
  * notes are per-browser: she should export before switching device.
  *
- * Remove <FeedbackWidget /> from app/layout.tsx before the site goes public.
+ * Mounted only when REVIEW_MODE is set — see lib/flags.ts. In a production
+ * build without the flag this component is never referenced and never ships.
  */
 export default function FeedbackWidget() {
   const pathname = usePathname();

@@ -2,9 +2,12 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { fontVariables } from '@/lib/fonts';
 import { SITE_NAME, SITE_URL } from '@/lib/seo';
+import { REVIEW_MODE } from '@/lib/flags';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import JsonLd from '@/components/JsonLd';
+/* Resolves to a stub that renders nothing outside review builds — the alias
+   is in next.config.ts, the flag in lib/flags.ts. */
 import FeedbackWidget from '@/components/FeedbackWidget';
 
 const DESCRIPTION =
@@ -84,9 +87,8 @@ export default function RootLayout({
         </main>
         <Footer />
         <JsonLd />
-        {/* Review tool for Sabrina — remove this line before the site goes
-            public. See components/FeedbackWidget.tsx. */}
-        <FeedbackWidget />
+        {/* Review tool for Sabrina — see lib/flags.ts. */}
+        {REVIEW_MODE ? <FeedbackWidget /> : null}
       </body>
     </html>
   );

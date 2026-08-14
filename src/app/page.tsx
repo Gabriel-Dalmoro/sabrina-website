@@ -152,8 +152,8 @@ export default function HomePage() {
 
             <div className="lg:col-span-5">
               <PhotoPlate
-                src="/photos/sabrina_photo_06.jpg"
-                alt="Sabrina Carlier, un verre de vin à la main, dans un bar à vin"
+                src="/photos/sabrina_shoot_5147.jpg"
+                alt="Sabrina Carlier allongée en travers d’un fauteuil orange, escarpins jaunes en l’air, levant un verre de vin rouge vers la lumière"
                 ratio="aspect-square"
                 priority
                 sizes="(max-width: 1024px) 100vw, 40vw"
