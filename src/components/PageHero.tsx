@@ -14,7 +14,13 @@ interface PageHeroProps {
   scriptX?: string;
   scriptScale?: number;
   scriptAvailable?: string;
-  photo?: { src: string; alt: string; duo?: 'electric' | 'flame' | 'mint' | 'lilac' | 'lemon' | 'none' };
+  photo?: {
+    src: string;
+    alt: string;
+    duo?: 'electric' | 'flame' | 'mint' | 'lilac' | 'lemon' | 'none';
+    /** Crop anchor — see PhotoPlate's `position`. */
+    position?: string;
+  };
   /** Actions under the lead — buttons, links. */
   children?: ReactNode;
 }
@@ -68,6 +74,7 @@ export default function PageHero({
                 src={photo.src}
                 alt={photo.alt}
                 duo={photo.duo ?? 'none'}
+                position={photo.position}
                 ratio="aspect-[5/4] lg:aspect-square"
                 priority
                 sizes="(max-width: 1024px) 100vw, 30vw"

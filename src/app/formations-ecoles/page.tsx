@@ -148,6 +148,8 @@ export default function FormationsPage() {
                 <PhotoPlate
                   src="/photos/sabrina_photo_01.jpg"
                   alt="Promotion d’étudiants pendant un cours de Sabrina Carlier"
+                  // Her face is at the very bottom of this 9:16 selfie.
+                  position="50% 96%"
                   offset="var(--color-lilac)"
                   ratio="aspect-[3/4]"
                   sizes="(max-width: 1024px) 100vw, 30vw"

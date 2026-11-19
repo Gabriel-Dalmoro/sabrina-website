@@ -28,6 +28,12 @@ interface PhotoPlateProps {
   /** Tailwind aspect ratio class. The library is almost entirely portrait. */
   ratio?: string;
   grain?: boolean;
+  /**
+   * Which part of the photo survives the crop, as CSS object-position. The
+   * default centres it; a tall phone photo with the subject at the bottom
+   * needs anchoring lower or the crop cuts them off.
+   */
+  position?: string;
 }
 
 /**
@@ -44,6 +50,7 @@ export default function PhotoPlate({
   className = '',
   ratio = 'aspect-[3/4]',
   grain = true,
+  position,
 }: PhotoPlateProps) {
   const duotone = duo !== 'none';
   const style = duotone
@@ -76,6 +83,7 @@ export default function PhotoPlate({
           priority={priority}
           sizes={sizes}
           className="object-cover"
+          style={position ? { objectPosition: position } : undefined}
         />
         {grain ? <span aria-hidden="true" className="grain-layer" /> : null}
       </div>

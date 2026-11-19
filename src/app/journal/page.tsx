@@ -29,6 +29,12 @@ export default async function JournalPage() {
         scriptScale={0.4}
         scriptAvailable="min(calc(100vw - 3rem), 28rem)"
         lead="Ce qui ne se raconte pas toujours à table. Des textes écrits le soir, à lire ici, ou à recevoir par e-mail en vous abonnant sur Substack."
+        photo={{
+          src: '/photos/sabrina_journal.jpg',
+          alt: 'Sabrina Carlier goûtant un verre de vin rouge, en noir et blanc',
+          // Square photo, 5:4 crop on phones: keep her head, lose the overalls.
+          position: '50% 0%',
+        }}
       >
         <div className="flex flex-wrap items-center gap-5">
           <a

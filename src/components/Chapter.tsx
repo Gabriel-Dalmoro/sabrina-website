@@ -15,6 +15,8 @@ export interface ChapterData {
   href: string;
   cta: string;
   photo: string;
+  /** Crop anchor, passed to PhotoPlate — see its `position` prop. */
+  photoPosition?: string;
   alt: string;
   colorway: 'electric' | 'lemon' | 'mint' | 'lilac';
   duo: 'electric' | 'flame' | 'mint' | 'lilac' | 'lemon' | 'none';
@@ -44,6 +46,7 @@ export default function Chapter({
             <PhotoPlate
               src={chapter.photo}
               alt={chapter.alt}
+              position={chapter.photoPosition}
               duo={chapter.duo}
               ratio="aspect-[4/5]"
               sizes="(max-width: 1024px) 100vw, 40vw"

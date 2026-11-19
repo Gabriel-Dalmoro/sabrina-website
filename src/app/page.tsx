@@ -73,6 +73,9 @@ const CHAPTERS: ChapterData[] = [
     href: '/formations-ecoles',
     cta: "Voir les domaines d'intervention",
     photo: '/photos/sabrina_photo_01.jpg',
+    // Her selfie face is at the very bottom of this 9:16 shot; a centred
+    // crop cut her off.
+    photoPosition: '50% 96%',
     alt: 'Sabrina Carlier face à une promotion d’étudiants en salle de cours',
     colorway: 'mint',
     duo: 'none',
