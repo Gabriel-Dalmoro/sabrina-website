@@ -53,12 +53,15 @@ export default async function PostPage({ params }: Props) {
   return (
     <>
       <article data-cw="paper" className="relative">
-        <div className="mx-auto max-w-[100rem] px-5 pb-20 pt-12 sm:px-8 sm:pb-28 sm:pt-16">
+        {/* A centred 64rem column, not the site's 100rem frame: on a wide screen
+            the reading text otherwise sits against the left edge with an
+            empty half-page beside it. */}
+        <div className="mx-auto max-w-[64rem] px-5 pb-20 pt-12 sm:px-8 sm:pb-28 sm:pt-16 lg:box-content">
           <Link href="/journal" className="t-label inline-block hover:underline" style={{ color: 'var(--quiet)' }}>
             ← Le journal
           </Link>
 
-          <header className="mt-10 lg:max-w-[62rem]">
+          <header className="mt-10">
             {post.episode ? (
               <p className="t-label" style={{ color: 'var(--accent)' }}>
                 {post.episode}
@@ -77,23 +80,23 @@ export default async function PostPage({ params }: Props) {
           {post.cover ? (
             <PostCover
               src={post.cover}
-              sizes="(max-width: 1024px) 100vw, 62rem"
+              sizes="(max-width: 1024px) 100vw, 64rem"
               offset="var(--color-lemon)"
               priority
-              className="mt-12 lg:max-w-[62rem]"
+              className="mt-12"
             />
           ) : null}
 
-          <div className="mt-16 grid gap-14 sm:mt-20 lg:grid-cols-12 lg:gap-16">
+          <div className="mt-16 grid gap-14 sm:mt-20 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-16">
             <div
-              className="prose-journal measure lg:col-span-7"
+              className="prose-journal measure"
               // Sanitised in lib/substack.ts: an allow-list of reading tags,
               // no scripts, styles or event handlers, iframes from a fixed
               // list of players only.
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
 
-            <aside className="lg:col-span-4 lg:col-start-9">
+            <aside>
               <div className="border-t-2 border-ink pt-6 lg:sticky lg:top-28">
                 <p className="t-label" style={{ color: 'var(--quiet)' }}>
                   Publié d&apos;abord sur Substack
@@ -116,7 +119,7 @@ export default async function PostPage({ params }: Props) {
                     href={post.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn--ghost justify-center"
+                    className="btn btn--ghost justify-center hover:border-electric hover:bg-electric hover:text-paper"
                   >
                     Lire sur Substack
                     <span aria-hidden="true">↗</span>
@@ -147,7 +150,7 @@ function MorePosts({ newer, older }: { newer?: Post; older?: Post }) {
     <nav aria-label="Autres textes du journal" data-cw="ink" className="relative">
       <span aria-hidden="true" className="grain-layer" />
 
-      <div className="relative z-10 mx-auto max-w-[100rem] px-5 py-16 sm:px-8 sm:py-20">
+      <div className="relative z-10 mx-auto max-w-[64rem] px-5 py-16 sm:px-8 sm:py-20 lg:box-content">
         <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           {links.map(({ post, label }) => (
             <Link
