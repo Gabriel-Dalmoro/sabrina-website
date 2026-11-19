@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import LayeredTitle from './LayeredTitle';
 import PhotoPlate from './PhotoPlate';
 
-type Colorway = 'paper' | 'ink' | 'electric' | 'lemon' | 'lilac' | 'mint' | 'flame';
+type Colorway = 'paper' | 'cream' | 'ink' | 'electric' | 'lemon' | 'lilac' | 'mint' | 'flame';
 
 interface PageHeroProps {
   colorway: Colorway;

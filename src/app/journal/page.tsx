@@ -21,7 +21,7 @@ export default async function JournalPage() {
   return (
     <>
       <PageHero
-        colorway="paper"
+        colorway="cream"
         kicker="Le journal · publié sur Substack"
         lines={['Le', 'journal']}
         script="enfin, théoriquement"
@@ -49,7 +49,7 @@ export default async function JournalPage() {
       </PageHero>
 
       <section id="textes" data-cw="paper" className="relative scroll-mt-20">
-        <div className="mx-auto max-w-[100rem] border-t-2 border-ink px-5 py-20 sm:px-8 sm:py-28">
+        <div className="mx-auto max-w-[100rem] px-5 py-20 sm:px-8 sm:py-28">
           {posts.length > 0 ? (
             <PostList posts={posts} />
           ) : (

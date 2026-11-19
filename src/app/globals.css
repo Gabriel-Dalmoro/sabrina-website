@@ -21,6 +21,11 @@
   --color-ink: #12131a;
   --color-paper: #faf8f5;
 
+  /* A warm paper for the journal hero — every other page opens on colour,
+     and plain paper read as "no hero". Not in the charte; kept light so it
+     reads as paper, not as a fifth brand colour. */
+  --color-cream: #f5ecd9;
+
   /*
    * #FF4F14 is only 3.10:1 on paper — fine for display type, a fail for
    * anything under 24px. This is the same orange darkened to 80%, the point
@@ -77,6 +82,24 @@
   --accent: var(--color-flame-deep);
   --rule: rgb(18 19 26 / 0.14);
   --quiet: rgb(18 19 26 / 0.62);
+}
+
+/*
+ * Black caps, deep-orange script, on cream — the journal.
+ *                                   15.77 / 4.17 / 3.78
+ * Bright flame drops to 2.80:1 on any cream dark enough to be seen, under the
+ * 3:1 the script needs, so the script takes flame-deep instead. Flame-deep
+ * is only 4.17:1 here — short of 4.5 for small text — so small accents go
+ * to ink.
+ */
+[data-cw="cream"] {
+  --ground: var(--color-cream);
+  --display: var(--color-ink);
+  --script: var(--color-flame-deep);
+  --body: var(--color-ink);
+  --accent: var(--color-ink);
+  --rule: rgb(18 19 26 / 0.16);
+  --quiet: rgb(18 19 26 / 0.66);
 }
 
 /* Yellow caps, orange script, on black — the "coup de grâce" lockup.
