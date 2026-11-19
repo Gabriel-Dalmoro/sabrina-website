@@ -51,6 +51,23 @@ constant in the same commit — canonical URLs, `og:image`, JSON-LD and the
 sitemap all derive from it, and WhatsApp will not follow a redirect to fetch a
 preview image.
 
+## The journal (her Substack)
+
+`/journal` shows her Substack posts in the site's own design. She writes and
+publishes on Substack as usual; the site reads the public RSS feed
+(`sabrinacarlier.substack.com/feed`) and refreshes it **at most once an hour**,
+so a new post appears here within the hour with no redeploy.
+
+| | |
+| --- | --- |
+| `src/lib/substack.ts` | fetch, parse, and clean the feed — an allow-list sanitiser strips Substack's buttons, widgets and anything unsafe |
+| `src/app/journal/` | the index and the article pages |
+| `src/components/SubscribeBand.tsx` | the "subscribe on Substack" call to action |
+
+Every button to subscribe or comment goes to Substack — that is where her
+email list lives. Substack's RSS only carries the latest ~20 posts; past that,
+the oldest drop off the journal and would need the archive pulled another way.
+
 ## Brand assets
 
 `favicon.ico`, `apple-icon.png` and `opengraph-image.jpg` are generated, not

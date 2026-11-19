@@ -1,5 +1,5 @@
 import { SITE_URL, SITE_NAME } from '@/lib/seo';
-import { CONTACT_EMAIL, PODCAST_URL } from '@/lib/nav';
+import { CONTACT_EMAIL, PODCAST_URL, SUBSTACK_URL } from '@/lib/nav';
 
 /**
  * Structured data describing who Sabrina is and what she offers.
@@ -56,7 +56,7 @@ export default function JsonLd() {
         name: 'ISG Luxury Management',
         description: 'Intervenante en Hospitality & Wine, Lyon et Genève',
       },
-      sameAs: [PODCAST_URL],
+      sameAs: [PODCAST_URL, SUBSTACK_URL],
     },
     {
       '@type': 'WebSite',

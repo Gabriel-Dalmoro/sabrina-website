@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import LayeredTitle from './LayeredTitle';
 import PhotoPlate from './PhotoPlate';
 
@@ -14,6 +15,8 @@ interface PageHeroProps {
   scriptScale?: number;
   scriptAvailable?: string;
   photo?: { src: string; alt: string; duo?: 'electric' | 'flame' | 'mint' | 'lilac' | 'lemon' | 'none' };
+  /** Actions under the lead — buttons, links. */
+  children?: ReactNode;
 }
 
 export default function PageHero({
@@ -26,6 +29,7 @@ export default function PageHero({
   scriptScale = 0.4,
   scriptAvailable = 'min(calc(100vw - 3rem), 40rem)',
   photo,
+  children,
 }: PageHeroProps) {
   return (
     <section data-cw={colorway} className="relative">
@@ -50,6 +54,7 @@ export default function PageHero({
               scriptAvailable={scriptAvailable}
             />
             <p className="t-lead measure-wide mt-10">{lead}</p>
+            {children ? <div className="mt-9">{children}</div> : null}
           </div>
 
           {photo ? (

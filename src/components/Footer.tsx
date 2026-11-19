@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { NAV_LINKS, CONTACT_EMAIL, PODCAST_URL } from '@/lib/nav';
+import { NAV_LINKS, CONTACT_EMAIL, PODCAST_URL, SUBSTACK_URL } from '@/lib/nav';
 import LayeredTitle from './LayeredTitle';
 import Wordmark from './Wordmark';
 
@@ -64,6 +64,18 @@ export default function Footer() {
               className="block hover:underline"
             >
               « Les 400 Coups » sur France Bleu
+              <span className="t-label ml-2 align-middle" style={{ color: 'var(--quiet)' }}>
+                ↗
+              </span>
+            </a>
+
+            <a
+              href={SUBSTACK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2.5 block hover:underline"
+            >
+              Le journal, sur Substack
               <span className="t-label ml-2 align-middle" style={{ color: 'var(--quiet)' }}>
                 ↗
               </span>

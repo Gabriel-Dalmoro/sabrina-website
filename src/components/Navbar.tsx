@@ -6,6 +6,11 @@ import { usePathname } from 'next/navigation';
 import { NAV_LINKS } from '@/lib/nav';
 import Wordmark from './Wordmark';
 
+/** A section stays highlighted on its sub-pages — the journal on each article. */
+function isActive(pathname: string, href: string) {
+  return pathname === href || (href !== '/' && pathname.startsWith(`${href}/`));
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -64,7 +69,7 @@ export default function Navbar() {
 
         <nav aria-label="Navigation principale" className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => {
-            const active = pathname === link.href;
+            const active = isActive(pathname, link.href);
             return (
               <Link
                 key={link.href}
@@ -116,7 +121,7 @@ export default function Navbar() {
             className="relative z-10 flex flex-col px-5 py-8 sm:px-8"
           >
             {NAV_LINKS.map((link) => {
-              const active = pathname === link.href;
+              const active = isActive(pathname, link.href);
               return (
                 <Link
                   key={link.href}

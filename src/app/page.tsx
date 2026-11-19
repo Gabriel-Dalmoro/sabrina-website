@@ -5,6 +5,7 @@ import Marquee from '@/components/Marquee';
 import Reveal from '@/components/Reveal';
 import Chapter, { type ChapterData } from '@/components/Chapter';
 import PhotoGallery from '@/components/PhotoGallery';
+import JournalTeaser from '@/components/JournalTeaser';
 import { CONTACT_EMAIL } from '@/lib/nav';
 import {
   OPENING,
@@ -15,6 +16,9 @@ import {
   TODAY_LIST,
   CLOSING,
 } from '@/content/presentation';
+
+/** The journal teaser reads the Substack feed. Must match FEED_REVALIDATE. */
+export const revalidate = 3600;
 
 const CHAPTERS: ChapterData[] = [
   {
@@ -369,6 +373,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── JOURNAL ──────────────────────────────────────────────────────── */}
+      {/* Lilac between two paper sections; renders nothing if the feed is empty. */}
+      <JournalTeaser />
 
       {/* ── GALLERY ──────────────────────────────────────────────────────── */}
       <PhotoGallery />

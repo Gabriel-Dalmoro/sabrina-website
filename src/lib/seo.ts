@@ -31,29 +31,44 @@ export function pageMetadata({
   title,
   description,
   path,
+  article,
 }: {
   title: string;
   description: string;
   path: string;
+  /**
+   * Journal posts: shared as an article, with the post's own cover as the
+   * card instead of the site-wide one.
+   */
+  article?: { publishedTime?: string; image?: string | null };
 }): Metadata {
   const url = `${SITE_URL}${path}`;
+  const images = article?.image ? [{ url: article.image }] : undefined;
 
   return {
     title,
     description,
     alternates: { canonical: url },
     openGraph: {
-      type: 'website',
+      ...(article
+        ? {
+            type: 'article',
+            publishedTime: article.publishedTime || undefined,
+            authors: [SITE_NAME],
+          }
+        : { type: 'website' }),
       locale: 'fr_FR',
       siteName: SITE_NAME,
       title,
       description,
       url,
+      ...(images ? { images } : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      ...(images ? { images } : {}),
     },
   };
 }
