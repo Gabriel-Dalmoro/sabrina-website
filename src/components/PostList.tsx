@@ -100,8 +100,8 @@ export default function PostList({ posts }: { posts: Post[] }) {
                 {post.cover ? (
                   <PostCover
                     src={post.cover}
-                    size={post.coverSize}
-                    maxHeightVh={60}
+                    // No `size`: older posts share one standard 3:2 thumbnail so
+                    // the list stays even. Only the featured post is uncropped.
                     sizes="(max-width: 768px) 100vw, 14rem"
                     className="col-span-2 md:col-span-1"
                   />
