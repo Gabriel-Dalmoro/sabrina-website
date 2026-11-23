@@ -77,6 +77,8 @@ export default async function JournalTeaser() {
                     {post.cover ? (
                       <PostCover
                         src={post.cover}
+                        size={post.coverSize}
+                        maxHeightVh={60}
                         sizes="(max-width: 640px) 100vw, 12rem"
                         className="sm:order-none -order-1"
                       />

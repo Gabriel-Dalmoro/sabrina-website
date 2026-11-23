@@ -42,6 +42,11 @@ export interface Post {
   date: string;
   readingMinutes: number;
   cover: string | null;
+  /**
+   * The cover's real pixel size, so it can be shown uncropped. Null when the
+   * image address doesn't carry it, in which case callers fall back to 3:2.
+   */
+  coverSize: { width: number; height: number } | null;
   /** The post on Substack — for comments, likes and sharing. */
   url: string;
   /** Sanitised, ready to render. */
@@ -153,6 +158,7 @@ export function parseFeed(xml: string): Post[] {
         date: validDate ? DATE_FR.format(validDate) : '',
         readingMinutes: readingTime(raw),
         cover,
+        coverSize: imageSize(cover),
         url,
         html: cleanPostHtml(dropLeadingCover(raw, cover)),
       },
@@ -188,6 +194,17 @@ function readingTime(html: string): number {
 
 function firstImage(html: string): string | null {
   return html.match(/<img[^>]+src="([^"]+)"/)?.[1] ?? null;
+}
+
+/**
+ * Substack names every upload `<uuid>_<width>x<height>.<ext>`, and that name
+ * survives inside its CDN URLs, so the original proportions are readable
+ * without downloading the image.
+ */
+function imageSize(url: string | null): { width: number; height: number } | null {
+  if (!url) return null;
+  const m = decodeURIComponent(url).match(/_(\d{2,5})x(\d{2,5})\.(?:jpe?g|png|webp|gif|avif)/i);
+  return m ? { width: Number(m[1]), height: Number(m[2]) } : null;
 }
 
 /** The S3 image id Substack's CDN URLs are built around. */

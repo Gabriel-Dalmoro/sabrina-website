@@ -80,6 +80,8 @@ export default async function PostPage({ params }: Props) {
           {post.cover ? (
             <PostCover
               src={post.cover}
+              size={post.coverSize}
+              maxHeightVh={80}
               sizes="(max-width: 1024px) 100vw, 64rem"
               offset="var(--color-lemon)"
               priority

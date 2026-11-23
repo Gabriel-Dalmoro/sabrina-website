@@ -39,6 +39,8 @@ export default function PostList({ posts }: { posts: Post[] }) {
           {latest.cover ? (
             <PostCover
               src={latest.cover}
+              size={latest.coverSize}
+              maxHeightVh={75}
               sizes="(max-width: 1024px) 100vw, 55vw"
               offset="var(--color-lemon)"
               priority
@@ -98,6 +100,8 @@ export default function PostList({ posts }: { posts: Post[] }) {
                 {post.cover ? (
                   <PostCover
                     src={post.cover}
+                    size={post.coverSize}
+                    maxHeightVh={60}
                     sizes="(max-width: 768px) 100vw, 14rem"
                     className="col-span-2 md:col-span-1"
                   />
